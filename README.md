@@ -1,5 +1,6 @@
 # Central de Erros
 
+
 ## Objetivo
 
 Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em serviços ou microsserviços. Nestes ambientes complexos, erros podem surgir em diferentes camadas da aplicação (backend, frontend, mobile, desktop) e mesmo em serviços distintos. Desta forma, é muito importante que os desenvolvedores possam centralizar todos os registros de erros em um local, de onde podem monitorar e tomar decisões mais acertadas. Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações.
@@ -34,3 +35,17 @@ A arquitetura do projeto é formada por:
 - [Paula](https://github.com/paulacampigotto)
 - [Silmara](https://github.com/Silmaraleitec)
 - [Vanessa](https://github.com/vanessalage)
+
+
+## Wireframes
+
+Os wireframes a seguir servem para ilustrar as funcionalidades básicas que a aplicação deverá ter, porém o time terá total liberdade para definir os detalhes de implementação e estratégia a ser utilizada no desenvolvimento.
+
+![Cadastro](/wireframes/1-cadastro.png)
+![Login](/wireframes/2-login.png)
+![Dashboard](/wireframes/3-dashboard.png)
+![Ambientes](/wireframes/4-ambientes.png)
+![Order](/wireframes/5-order.png)
+![Filtro](/wireframes/6-filtro.png)
+![Detalhes](/wireframes/7-detalhes.png)
+
