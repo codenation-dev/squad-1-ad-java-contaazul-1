@@ -29,8 +29,8 @@ A arquitetura do projeto é formada por:
 
 ## Integrantes
 
-[Larissa](https://github.com/1903larissaalves)
-[Nathália](https://github.com/ncezar)
-[Paula](https://github.com/paulacampigotto)
-[Silmara](https://github.com/Silmaraleitec)
-[Vanessa](https://github.com/vanessalage)
+- [Larissa](https://github.com/1903larissaalves)
+- [Nathália](https://github.com/ncezar)
+- [Paula](https://github.com/paulacampigotto)
+- [Silmara](https://github.com/Silmaraleitec)
+- [Vanessa](https://github.com/vanessalage)
