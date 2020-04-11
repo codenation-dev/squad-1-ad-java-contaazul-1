@@ -1,27 +1,63 @@
 package com.entity;
 
 import java.time.Instant;
-import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-//@Entity
-//@Table(name = "erro")
+import org.springframework.data.annotation.CreatedDate;
+
+@Entity
+@Table(name = "erro")
 public class Erro {
 	
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
+	
+	@Column(name = "titulo")
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String titulo;
+	
+	@Column(name = "detalhes")
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String detalhes;
+	
+	@Column(name = "origem")
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String origem;
+	
+	@Column(name = "data")
+	@NotNull
+	@Size(min = 1, max = 100)
+	@CreatedDate
+	@Temporal(TemporalType.TIMESTAMP)
 	private Instant data;
+	
+	@Column(name = "nivel")
+	@NotNull
+	@Size(min = 1, max = 100)
 	private String nivel;
+	
+	@Column(name = "idUsuario")
+	@NotNull
+	@Size(min = 1, max = 100)
 	private Integer idUsuario;
-	private String status;
+	
+	public Erro() {
+		
+	}
 	
 	public Erro (String titulo, String detalhes, String origem, Instant data, String nivel, Integer idUsuario) {
 		this.setTitulo(titulo);
@@ -92,15 +128,5 @@ public class Erro {
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-
 
 }

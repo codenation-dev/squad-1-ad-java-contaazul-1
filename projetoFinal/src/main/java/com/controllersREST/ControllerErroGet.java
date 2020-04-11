@@ -1,4 +1,4 @@
-package com.controllers;
+package com.controllersREST;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import com.entity.Erro;
 
 @Controller
 public class ControllerErroGet {
-	@RequestMapping(method = RequestMethod.GET, value = "/get")
+	@RequestMapping(method = RequestMethod.GET, value = "/erro/get")
 	@ResponseBody
 	public List<Erro> getAllErros() {
 		return RegistroErro.getInstance().getErros();
