@@ -100,6 +100,10 @@ public class Usuario extends AuditModel {
 	public void setToken() {
 		this.token = UUID.randomUUID().toString(); //usar JWT 
 	}
+	
+	public void setToken(String token) {
+		this.token = token;
+	}
 
 	public String getEmail() {
 		return email;
