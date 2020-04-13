@@ -1,6 +1,7 @@
-package com.controllersREST;
+package com.controllers;
 
 
+import java.time.Instant;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,7 @@ import com.entity.*;
 @Controller
 
 public class ControllerErroPost {
-  @RequestMapping(method = RequestMethod.POST, value="/erro/post")
+  @RequestMapping(method = RequestMethod.POST, value="/post")
   @ResponseBody
 
   public RespostaRegistroErro registraErro(@RequestBody Erro erro) {
@@ -26,8 +27,10 @@ public class ControllerErroPost {
 		resposta.setTitulo(erro.getTitulo());
 		resposta.setDetalhes(erro.getDetalhes());
 		resposta.setOrigem(erro.getOrigem());
+		resposta.setData(Instant.now());
 		resposta.setNivel(erro.getNivel());
 		resposta.setIdUsuario(erro.getIdUsuario());
+        resposta.setStatus("Successful");
         return resposta;
 
 }

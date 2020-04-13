@@ -1,46 +1,23 @@
 package com.entity;
 
-
-import javax.persistence.Column;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
-@Entity
-@Table(name = "usuario")
+//@Entity
+//@Table(name = "usuario")
 public class Usuario {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+//	@Id
+//	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
-	@Column(name = "nome")
-	@NotNull
-	@Size(min = 1, max = 100)
 	private String nome;
-	
-	@Column(name = "senha")
-	@NotNull
-	@Size(min = 1, max = 100)
 	private String senha;
-	
-	@Column(name = "token")
-	@NotNull
-	@Size(min = 1, max = 100)
 	private String token;
-	
-	@Column(name = "email")
-	@NotNull
-	@Size(min = 1, max = 100)
 	private String email;
-	
-	public Usuario() {
-		
-	}
 	
 	public Usuario (String nome, String senha, String token, String email) {
 		this.setNome(nome);

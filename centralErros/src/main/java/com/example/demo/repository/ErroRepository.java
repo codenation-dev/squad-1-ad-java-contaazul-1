@@ -1,11 +1,11 @@
-package com.repositories;
+package com.example.demo.repository;
 
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-import org.springframework.stereotype.Component;
 
-import com.entity.*;
+
+import com.example.demo.model.Erro;
 
 
 @RepositoryRestResource
