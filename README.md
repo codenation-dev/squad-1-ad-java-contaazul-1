@@ -24,7 +24,6 @@ A arquitetura do projeto é formada por:
 - criar um endpoint que será usado para gravar os logs de erro em um banco de dados relacional
 - a API deve ser segura, permitindo acesso apenas com um token de autenticação válido
 
-
 ### Frontend 
 
 - deve implementar as funcionalidades apresentadas nos wireframes
@@ -33,22 +32,34 @@ A arquitetura do projeto é formada por:
 - desenvolvida na forma de uma Single Page Application
 
 
-## Observações 
 
-- Se a aceleração tiver ênfase no backend (Java, Python, C#, Go, PHP, etc) a equipe deve obrigatoriamente implementar a API. A implementação do frontend não é necessária
-- Se a aceleração tiver ênfase em frontend (React, Vue, Angular, etc) a equipe deve obrigatoriamente implementar o frontend da aplicação e o backend pode ser substituido por uma aplicação mock. A implementação da API não é necessária, caso o time deseje podem ser utilizados mocks.
+## Setup
+
+### Tecnologias utilizadas
+
+- JDK 
+- IDE Eclipse 
+- Maven 
+- Spring Boot 
+- Spring Framework 
+- JPA
+- Hibernate 
+- PostgreSQL
+- Postman
+- Vue
 
 
+### Servidor API
 
-## Wireframes 
+```
+mvn spring-boot:run
+```
+### Servidor Frontend
 
-Os wireframes a seguir servem para ilustrar as funcionalidades básicas que a aplicação deverá ter, porém o time terá total liberdade para definir os detalhes de implementação e estratégia a ser utilizada no desenvolvimento.
+```
+npm install
+```
 
-![Cadastro](/wireframes/1-cadastro.png)
-![Login](/wireframes/2-login.png)
-![Dashboard](/wireframes/3-dashboard.png)
-![Ambientes](/wireframes/4-ambientes.png)
-![Order](/wireframes/5-order.png)
-![Filtro](/wireframes/6-filtro.png)
-![Detalhes](/wireframes/7-detalhes.png)
-
+```
+npm run dev
+```
