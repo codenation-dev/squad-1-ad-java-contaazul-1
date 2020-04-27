@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="centralizado">
-    <h1>{{ titulo }}</h1>
+    <h1>{{ titulo }}</h1>//teste
     <div class="margem">
       <input type="text" placeholder="e-mail" />
     </div>
