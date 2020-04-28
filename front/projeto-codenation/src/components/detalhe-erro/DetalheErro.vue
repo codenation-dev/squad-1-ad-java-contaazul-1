@@ -4,7 +4,9 @@
       <h1>Bem vindo {{usuario.nome}}. Seu token é {{usuario.token}}</h1>
     </div>
     <div>
-      <button>Voltar</button>
+      <router-link to="/home">
+        <button>{{voltar}}</button>
+      </router-link>
     </div>
     <div class="erro">
       <label>Erro no 127.0.0.1 em 13/04/2020 10:15</label>
@@ -40,6 +42,7 @@
 export default {
   data() {
     return {
+      voltar: "Voltar",
       usuario: {
         nome: "Larissa",
         token: "4d5748sdasd"

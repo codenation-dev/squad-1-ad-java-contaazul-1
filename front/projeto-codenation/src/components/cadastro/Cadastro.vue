@@ -5,10 +5,15 @@
       <input type="text" placeholder="e-mail" />
     </div>
     <div class="margem">
-      <input type="password" placeholder="password" />
+      <input type="password" placeholder="Senha" />
+    </div>
+    <div class="margem">
+      <input type="password" placeholder="Confirmar senha" />
     </div>
     <div>
-      <button>{{cadastrar}}</button>
+      <router-link to="/home">
+        <button>{{ cadastrar }}</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -36,5 +41,23 @@ export default {
 }
 .margem {
   margin-top: 10px;
+}
+
+button {
+  border-radius: 4px;
+  font-size: 15px;
+  padding: 10px 20px;
+  text-align: center;
+  color: white;
+  margin-top: 10px;
+  background-color: blue;
+  width: 15%;
+}
+input {
+  font-size: 15px;
+  padding: 8px 10px;
+  text-align: left;
+  color: black;
+  width: 50%;
 }
 </style>
