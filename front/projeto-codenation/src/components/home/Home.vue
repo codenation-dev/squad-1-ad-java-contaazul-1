@@ -1,7 +1,7 @@
 <template>
   <div>
-    <label>Bem vindo {{usuario.nome}}.</label>
-    <label>Seu token é {{usuario.token}}</label>
+    <label v-for = "usuario of usuario" :key="usuario.id">Bem vindo(a) {{usuario.nome}}.</label>
+    <label v-for = "usuario of usuario" :key="usuario.id">Seu token é {{usuario.token}}</label>
     <div class="margin">
       <select>
         <option value="producao">Produção</option>
@@ -36,13 +36,16 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr v-for = "erro of erros" :key="erro.id">
             <td>
               <input type="checkbox" />
             </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
+              <td>{{erro.nivel}}</td>
+
+              <td>{{erro.titulo}}<br>
+                  {{erro.detalhes}}<br>
+                  {{erro.origem}}</td>
+              <td>1</td>
           </tr>
           <tr>
             <td>
@@ -65,18 +68,33 @@
     </div>
   </div>
 </template>
+
 <script>
-export default {
-  data() {
-    return {
-      usuario: {
-        nome: "Larissa",
-        token: "4d5748sdasd"
-      }
-    };
-  }
-};
+      import Erro from '../../services/erros'
+      import Usuario from '../../services/usuarios'
+
+      export default {
+            data () {
+              return {
+                  usuario: [],
+                  erros: []
+              }
+            },
+            mounted(){
+                Erro.listar().then(resErro => {
+                    console.log(resErro.data)
+                    this.erros = resErro.data
+                })
+                Usuario.listar().then(resUsuario => {
+                    console.log(resUsuario.data)
+                    this.usuario = resUsuario.data
+                })
+            }            
+
+      }  
 </script>
+
+
 <style scoped>
 table {
   margin-top: 10px;
