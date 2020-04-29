@@ -27,18 +27,12 @@ public class Usuario extends AuditModel {
 	@Size(min = 1, max = 100)
 	private String nome;
 	
-	@Column(name = "cpf")
-	@NotBlank
-	@Size(min = 1, max = 100)
-	private String cpf;
-	
 	@Column(name = "senha")
 	@NotBlank
 	@Size(min = 1, max = 100)
 	private String senha;
 	
 	@Column(name = "token")
-	@NotBlank
 	@Size(min = 1, max = 100)
 	private String token;
 	
@@ -54,19 +48,9 @@ public class Usuario extends AuditModel {
 	
 	public Usuario (String nome, String cpf, String senha, String email) {
 		this.setNome(nome);
-		this.setCpf(cpf);
 		this.setSenha(senha);
 		this.setEmail(email);
 		this.setToken();
-	}
-
-	
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
-
-	public String getCpf() {
-		return this.cpf;
 	}
 	
 	public int getId() {

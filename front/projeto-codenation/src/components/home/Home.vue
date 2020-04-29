@@ -1,7 +1,7 @@
 <template>
   <div>
-    <label v-for = "usuario of usuario" :key="usuario.id">Bem vindo(a) {{usuario.nome}}.</label>
-    <label v-for = "usuario of usuario" :key="usuario.id">Seu token é {{usuario.token}}</label>
+    <label v-for="usuario of usuario" :key="usuario.id">Bem vindo(a) {{usuario.nome}}.</label>
+    <label v-for="usuario of usuario" :key="usuario.id">Seu token é {{usuario.token}}</label>
     <div class="margin">
       <select>
         <option value="producao">Produção</option>
@@ -9,13 +9,13 @@
         <option value="Dev">Dev</option>
       </select>
       <select>
-        <option value="ordenarPor">Ordenar Por</option>
-        <option value="nivel" selected>Nivel</option>
+        <option value="ordenarPor" selected>Ordenar Por</option>
+        <option value="nivel">Nivel</option>
         <option value="frequencia">Frequência</option>
       </select>
       <select>
-        <option value="buscarPor">Buscar Por</option>
-        <option value="nivel" selected>Nivel</option>
+        <option value="buscarPor" selected>Buscar Por</option>
+        <option value="nivel">Nivel</option>
         <option value="descrição">Descrição</option>
         <option value="origem">Origem</option>
       </select>
@@ -36,33 +36,22 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for = "erro of erros" :key="erro.id">
+          <tr v-for="erro of erros" :key="erro.id">
             <td>
               <input type="checkbox" />
             </td>
-              <td>{{erro.nivel}}</td>
+            <td>{{erro.nivel}}</td>
 
-              <td>{{erro.titulo}}<br>
-                  {{erro.detalhes}}<br>
-                  {{erro.origem}}</td>
-              <td>1</td>
-          </tr>
-          <tr>
             <td>
-              <input type="checkbox" />
+              {{erro.titulo}}
+              <br />
+              {{erro.detalhes}}
+              <br />
+              {{erro.origem}}
             </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
+            <td>1</td>
           </tr>
-          <tr>
-            <td>
-              <input type="checkbox" />
-            </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
-          </tr>
+          <tr></tr>
         </tbody>
       </table>
     </div>
@@ -70,28 +59,28 @@
 </template>
 
 <script>
-      import Erro from '../../services/erros'
-      import Usuario from '../../services/usuarios'
+import Erro from "../../services/erros";
+import Usuario from "../../services/usuarios";
 
-      export default {
-            data () {
-              return {
-                  usuario: [],
-                  erros: []
-              }
-            },
-            mounted(){
-                Erro.listar().then(resErro => {
-                    console.log(resErro.data)
-                    this.erros = resErro.data
-                })
-                Usuario.listar().then(resUsuario => {
-                    console.log(resUsuario.data)
-                    this.usuario = resUsuario.data
-                })
-            }            
-
-      }  
+export default {
+  data() {
+    return {
+      usuario: [],
+      erros: []
+    };
+  },
+  mounted() {
+    Erro.listar().then(resErro => {
+      console.log(resErro.data);
+      this.erros = resErro.data;
+    });
+    Usuario.listar().then(resUsuario => {
+      console.log(resUsuario.data);
+      this.usuario = resUsuario.data;
+    });
+  },
+  methods: {}
+};
 </script>
 
 

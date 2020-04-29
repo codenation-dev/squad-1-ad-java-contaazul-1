@@ -47,10 +47,9 @@ public class ControllerUsuario {
 		Usuario usuario = usuarioRepository.findById(usuarioId.intValue()).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado para o id " + usuarioId));
 
         usuario.setNome(usuarioDetalhes.getNome());
-        usuario.setCpf(usuarioDetalhes.getCpf());
         usuario.setSenha(usuarioDetalhes.getSenha());
         usuario.setEmail(usuarioDetalhes.getEmail());
-        usuario.setToken(usuarioDetalhes.getToken());
+        //usuario.setToken(usuarioDetalhes.getToken());
         final Usuario usuarioAtualizado = usuarioRepository.save(usuario);
         return ResponseEntity.ok(usuarioAtualizado);
     }
