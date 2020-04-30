@@ -2,15 +2,21 @@ package com.central.entity;
 
 
 
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 
 @Entity
@@ -18,7 +24,7 @@ import javax.validation.constraints.Size;
 public class Usuario extends AuditModel {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "nome")
@@ -36,16 +42,20 @@ public class Usuario extends AuditModel {
 	@Size(min = 1, max = 100)
 	@Email
 	private String email;
+	
+    @OneToMany(fetch=FetchType.LAZY,mappedBy = "usuario")
+    private Set<Erro> erros;
+    
 		
 	public Usuario() {
 		
 	}
 	
-	public Usuario (String nome, String senha, String email) {
-		this.setNome(nome);
-		this.setSenha(senha);
-		this.setEmail(email);
-	}
+//	public Usuario (String nome, String senha, String email) {
+//		this.setNome(nome);
+//		this.setSenha(senha);
+//		this.setEmail(email);
+//	}
 
 	
 	public Long getId() {

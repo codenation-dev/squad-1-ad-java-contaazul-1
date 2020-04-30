@@ -49,7 +49,7 @@ public class ErroController {
         erro.setDetalhes(erroDetalhes.getDetalhes());
         erro.setOrigem(erroDetalhes.getOrigem());
         erro.setNivel(erroDetalhes.getNivel());
-        erro.setIdUsuario(erroDetalhes.getIdUsuario());
+        erro.setUsuario(erroDetalhes.getUsuario());
         final Erro erroAtualizado = erroRepository.save(erro);
         return ResponseEntity.ok(erroAtualizado);
     }

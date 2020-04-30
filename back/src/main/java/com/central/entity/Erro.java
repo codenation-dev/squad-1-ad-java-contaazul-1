@@ -5,9 +5,12 @@ import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +25,7 @@ import org.springframework.data.annotation.CreatedDate;
 public class Erro extends AuditModel {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "titulo")
@@ -54,23 +57,25 @@ public class Erro extends AuditModel {
 	@NotNull
 	private boolean arquivado;
 	
-	@Column(name = "id_usuario")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id_usuario",referencedColumnName="id",nullable=false,unique=true)
 	@NotNull
-	private Integer idUsuario;
+	private Usuario usuario;
 	
 	public Erro() {
 		
 	}
+//	
+//	public Erro (String titulo, String detalhes, String origem, String nivel, String ambiente) {
+//		this.setTitulo(titulo);
+//		this.setDetalhes(detalhes);
+//		this.setOrigem(origem);
+//		this.setNivel(nivel);
+//		this.setArquivado(false);
+//		this.setAmbiente(ambiente);
+//	}
 	
-	public Erro (String titulo, String detalhes, String origem, String nivel, Integer idUsuario) {
-		this.setTitulo(titulo);
-		this.setDetalhes(detalhes);
-		this.setOrigem(origem);
-		this.setNivel(nivel);
-		this.setIdUsuario(idUsuario);
-		this.setArquivado(false);
-	}
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -115,13 +120,6 @@ public class Erro extends AuditModel {
 		this.detalhes = detalhes;
 	}
 
-	public Integer getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Integer idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 	public boolean isArquivado() {
 		return arquivado;
@@ -129,6 +127,22 @@ public class Erro extends AuditModel {
 
 	public void setArquivado(boolean arquivado) {
 		this.arquivado = arquivado;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public String getAmbiente() {
+		return ambiente;
+	}
+
+	public void setAmbiente(String ambiente) {
+		this.ambiente = ambiente;
 	}
 
 }
