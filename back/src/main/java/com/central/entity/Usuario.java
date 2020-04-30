@@ -51,13 +51,6 @@ public class Usuario extends AuditModel {
 		
 	}
 	
-//	public Usuario (String nome, String senha, String email) {
-//		this.setNome(nome);
-//		this.setSenha(senha);
-//		this.setEmail(email);
-//	}
-
-	
 	public Long getId() {
 		return id;
 	}
