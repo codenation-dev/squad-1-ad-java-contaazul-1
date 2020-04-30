@@ -1,17 +1,15 @@
 <template>
   <div>
-    <label v-for="usuario of usuario" :key="usuario.id">Bem vindo(a) {{usuario.nome}}.</label>
-    <label v-for="usuario of usuario" :key="usuario.id">Seu token é {{usuario.token}}</label>
+    <label>Bem vindo(a) {{usuario.nome}}.</label>
+    <label>Seu token é {{usuario.token}}</label>
     <div class="margin">
-      <select>
-        <option value="producao">Produção</option>
-        <option value="homologacao" selected>Homologação</option>
-        <option value="Dev">Dev</option>
+      <select v-model="ambienteSelecionado">
+        <option value>Buscar por</option>
+        <option v-for="ambiente in ambientes" :value="ambiente.tipo">{{ ambiente.descricao }}</option>
       </select>
-      <select>
-        <option value="ordenarPor" selected>Ordenar Por</option>
-        <option value="nivel">Nivel</option>
-        <option value="frequencia">Frequência</option>
+      <select v-model="ordenacaoSelecionada">
+        <option value>Ordenar Por</option>
+        <option v-for="ordem in ordenacao" :value="ordem.tipo">{{ ordem.descricao}}</option>
       </select>
       <select>
         <option value="buscarPor" selected>Buscar Por</option>
@@ -36,7 +34,11 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="erro of erros" :key="erro.id">
+          <tr
+            v-for="erro of listaOrdenada"
+            :key="erro.id"
+            v-if="erro.origem == ambienteSelecionado || filtrarTodosAmbientes"
+          >
             <td>
               <input type="checkbox" />
             </td>
@@ -61,25 +63,65 @@
 <script>
 import Erro from "../../services/erros";
 import Usuario from "../../services/usuarios";
+import erros from "../../services/erros";
 
 export default {
   data() {
     return {
-      usuario: [],
-      erros: []
+      usuario: {
+        nome: "",
+        token: ""
+      },
+      erros: [],
+      ambienteSelecionado: "",
+      ordenacaoSelecionada: "",
+      ambientes: [
+        { tipo: "homologacao", descricao: "Homologação" },
+        { tipo: "desenvolvimento", descricao: "Desenvolvimento" },
+        { tipo: "producao", descricao: "Produção" }
+      ],
+      ordenacao: [
+        { tipo: "nivel", descricao: "Nível" },
+        { tipo: "frequencia", descricao: "Frequência" }
+      ]
     };
   },
   mounted() {
     Erro.listar().then(resErro => {
-      console.log(resErro.data);
       this.erros = resErro.data;
     });
+
+    //substituir pela info que vem no login
     Usuario.listar().then(resUsuario => {
-      console.log(resUsuario.data);
-      this.usuario = resUsuario.data;
+      this.usuario = resUsuario.data[0];
     });
   },
-  methods: {}
+  computed: {
+    filtrarTodosAmbientes() {
+      return (
+        this.ambienteSelecionado != "homologacao" &&
+        this.ambienteSelecionado != "desenvolvimento" &&
+        this.ambienteSelecionado != "producao"
+      );
+    },
+    listaOrdenada() {
+      if (this.ordenacaoSelecionada == "nivel") {
+        return this.erros.sort(function(a, b) {
+          if (a.nivel > b.nivel) {
+            return 1;
+          }
+          if (a.nivel < b.nivel) {
+            return -1;
+          }
+          return 0;
+        });
+      } else if (this.ordenacaoSelecionada == "frequencia") {
+        return this.erros;
+      } else {
+        return this.erros;
+      }
+    }
+  }
 };
 </script>
 
