@@ -8,16 +8,14 @@
         <option v-for="ambiente in ambientes" :value="ambiente.tipo">{{ ambiente.descricao }}</option>
       </select>
       <select v-model="ordenacaoSelecionada">
-        <option value>Ordenar Por</option>
+        <option value disabled>Ordenar Por</option>
         <option v-for="ordem in ordenacao" :value="ordem.tipo">{{ ordem.descricao}}</option>
       </select>
-      <select>
-        <option value="buscarPor" selected>Buscar Por</option>
-        <option value="nivel">Nivel</option>
-        <option value="descrição">Descrição</option>
-        <option value="origem">Origem</option>
+      <select v-model="buscaSelecionado">
+        <option value disabled>Buscar Por</option>
+        <option v-for="buscar in filtroBuscar" :value="buscar.busca">{{ buscar.descricao }}</option>
       </select>
-      <input type="search" />
+      <input type="search" @input="filtro = $event.target.value" placeholder="Buscar por" />
     </div>
     <div>
       <button class="arquivar">Arquivar</button>
@@ -35,7 +33,7 @@
         </thead>
         <tbody>
           <tr
-            v-for="erro of listaOrdenada"
+            v-for="erro of descricaoErroFiltro"
             :key="erro.id"
             v-if="erro.origem == ambienteSelecionado || filtrarTodosAmbientes"
           >
@@ -75,6 +73,8 @@ export default {
       erros: [],
       ambienteSelecionado: "",
       ordenacaoSelecionada: "",
+      buscaSelecionado: "",
+      filtro: "",
       ambientes: [
         { tipo: "homologacao", descricao: "Homologação" },
         { tipo: "desenvolvimento", descricao: "Desenvolvimento" },
@@ -83,6 +83,11 @@ export default {
       ordenacao: [
         { tipo: "nivel", descricao: "Nível" },
         { tipo: "frequencia", descricao: "Frequência" }
+      ],
+      filtroBuscar: [
+        { busca: "nivel", descricao: "Nível" },
+        { busca: "descricao", descricao: "Descrição" },
+        { busca: "origem", descricao: "Origem" }
       ]
     };
   },
@@ -119,6 +124,22 @@ export default {
         return this.erros;
       } else {
         return this.erros;
+      }
+    },
+    descricaoErroFiltro() {
+      if (this.filtro) {
+        var exp = new RegExp(this.filtro.trim(), "i");
+        if (this.buscaSelecionado == "nivel") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.nivel));
+        }
+        if (this.buscaSelecionado == "descricao") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.detalhes));
+        }
+        if (this.buscaSelecionado == "origem") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.origem));
+        }
+      } else {
+        return this.listaOrdenada;
       }
     }
   }
