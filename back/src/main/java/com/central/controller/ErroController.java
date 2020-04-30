@@ -49,6 +49,8 @@ public class ErroController {
         erro.setDetalhes(erroDetalhes.getDetalhes());
         erro.setOrigem(erroDetalhes.getOrigem());
         erro.setNivel(erroDetalhes.getNivel());
+        erro.setAmbiente(erroDetalhes.getAmbiente());
+        erro.setArquivado(erroDetalhes.isArquivado());
         erro.setUsuario(erroDetalhes.getUsuario());
         final Erro erroAtualizado = erroRepository.save(erro);
         return ResponseEntity.ok(erroAtualizado);

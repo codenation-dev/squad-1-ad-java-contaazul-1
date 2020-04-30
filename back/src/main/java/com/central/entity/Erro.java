@@ -65,16 +65,6 @@ public class Erro extends AuditModel {
 	public Erro() {
 		
 	}
-//	
-//	public Erro (String titulo, String detalhes, String origem, String nivel, String ambiente) {
-//		this.setTitulo(titulo);
-//		this.setDetalhes(detalhes);
-//		this.setOrigem(origem);
-//		this.setNivel(nivel);
-//		this.setArquivado(false);
-//		this.setAmbiente(ambiente);
-//	}
-	
 
 	public Long getId() {
 		return id;
@@ -144,5 +134,6 @@ public class Erro extends AuditModel {
 	public void setAmbiente(String ambiente) {
 		this.ambiente = ambiente;
 	}
+
 
 }
