@@ -1,25 +1,21 @@
 <template>
   <div>
-    <label>Bem vindo {{usuario.nome}}.</label>
+    <label>Bem vindo(a) {{usuario.nome}}.</label>
     <label>Seu token é {{usuario.token}}</label>
     <div class="margin">
-      <select>
-        <option value="producao">Produção</option>
-        <option value="homologacao" selected>Homologação</option>
-        <option value="Dev">Dev</option>
+      <select v-model="ambienteSelecionado">
+        <option value>Buscar por</option>
+        <option v-for="ambiente in ambientes" :value="ambiente.tipo">{{ ambiente.descricao }}</option>
       </select>
-      <select>
-        <option value="ordenarPor">Ordenar Por</option>
-        <option value="nivel" selected>Nivel</option>
-        <option value="frequencia">Frequência</option>
+      <select v-model="ordenacaoSelecionada">
+        <option value disabled>Ordenar Por</option>
+        <option v-for="ordem in ordenacao" :value="ordem.tipo">{{ ordem.descricao}}</option>
       </select>
-      <select>
-        <option value="buscarPor">Buscar Por</option>
-        <option value="nivel" selected>Nivel</option>
-        <option value="descrição">Descrição</option>
-        <option value="origem">Origem</option>
+      <select v-model="buscaSelecionado">
+        <option value disabled>Buscar Por</option>
+        <option v-for="buscar in filtroBuscar" :value="buscar.busca">{{ buscar.descricao }}</option>
       </select>
-      <input type="search" />
+      <input type="search" @input="filtro = $event.target.value" placeholder="Buscar por" />
     </div>
     <div>
       <button class="arquivar">Arquivar</button>
@@ -36,47 +32,121 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
+          <tr
+            v-for="erro of descricaoErroFiltro"
+            :key="erro.id"
+            v-if="erro.origem == ambienteSelecionado || filtrarTodosAmbientes"
+          >
             <td>
               <input type="checkbox" />
             </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
-          </tr>
-          <tr>
+            <td>{{erro.nivel}}</td>
+
             <td>
-              <input type="checkbox" />
+              {{erro.titulo}}
+              <br />
+              {{erro.detalhes}}
+              <br />
+              {{erro.origem}}
             </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
+            <td>1</td>
           </tr>
-          <tr>
-            <td>
-              <input type="checkbox" />
-            </td>
-            <td>das</td>
-            <td>das</td>
-            <td>das</td>
-          </tr>
+          <tr></tr>
         </tbody>
       </table>
     </div>
   </div>
 </template>
+
 <script>
+import Erro from "../../services/erros";
+import Usuario from "../../services/usuarios";
+import erros from "../../services/erros";
+
 export default {
   data() {
     return {
       usuario: {
-        nome: "Larissa",
-        token: "4d5748sdasd"
-      }
+        nome: "",
+        token: ""
+      },
+      erros: [],
+      ambienteSelecionado: "",
+      ordenacaoSelecionada: "",
+      buscaSelecionado: "",
+      filtro: "",
+      ambientes: [
+        { tipo: "homologacao", descricao: "Homologação" },
+        { tipo: "desenvolvimento", descricao: "Desenvolvimento" },
+        { tipo: "producao", descricao: "Produção" }
+      ],
+      ordenacao: [
+        { tipo: "nivel", descricao: "Nível" },
+        { tipo: "frequencia", descricao: "Frequência" }
+      ],
+      filtroBuscar: [
+        { busca: "nivel", descricao: "Nível" },
+        { busca: "descricao", descricao: "Descrição" },
+        { busca: "origem", descricao: "Origem" }
+      ]
     };
+  },
+  mounted() {
+    Erro.listar().then(resErro => {
+      this.erros = resErro.data;
+    });
+
+    //substituir pela info que vem no login
+    Usuario.listar().then(resUsuario => {
+      this.usuario = resUsuario.data[0];
+    });
+  },
+  computed: {
+    filtrarTodosAmbientes() {
+      return (
+        this.ambienteSelecionado != "homologacao" &&
+        this.ambienteSelecionado != "desenvolvimento" &&
+        this.ambienteSelecionado != "producao"
+      );
+    },
+    listaOrdenada() {
+      if (this.ordenacaoSelecionada == "nivel") {
+        return this.erros.sort(function(a, b) {
+          if (a.nivel > b.nivel) {
+            return 1;
+          }
+          if (a.nivel < b.nivel) {
+            return -1;
+          }
+          return 0;
+        });
+      } else if (this.ordenacaoSelecionada == "frequencia") {
+        return this.erros;
+      } else {
+        return this.erros;
+      }
+    },
+    descricaoErroFiltro() {
+      if (this.filtro) {
+        var exp = new RegExp(this.filtro.trim(), "i");
+        if (this.buscaSelecionado == "nivel") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.nivel));
+        }
+        if (this.buscaSelecionado == "descricao") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.detalhes));
+        }
+        if (this.buscaSelecionado == "origem") {
+          return this.listaOrdenada.filter(erro => exp.test(erro.origem));
+        }
+      } else {
+        return this.listaOrdenada;
+      }
+    }
   }
 };
 </script>
+
+
 <style scoped>
 table {
   margin-top: 10px;
