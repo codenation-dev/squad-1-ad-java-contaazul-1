@@ -5,6 +5,10 @@ export default {
 		return http.get('usuario/get')
 	},
 
+	login: (nome, senha) => {
+		return http.get('login/get/' + nome + '/' + senha)
+	},
+
 	salvar: (usuario) => {
 		return http.post('usuario/post',
 			{

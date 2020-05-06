@@ -11,4 +11,6 @@ public interface UsuarioServiceInterface extends ServiceInterface<Usuario>{
 	Optional<Usuario> findById(Long id);
 	
 	List<Usuario> findByName(String name);
+
+	Usuario findByLogin(String name, String senha);
 }

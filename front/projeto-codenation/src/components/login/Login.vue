@@ -2,15 +2,39 @@
   <div id="app" class="centralizado">
     <h1>{{ titulo }}</h1>
     <div class="margem">
-      <input type="text" placeholder="e-mail" />
+      <input
+        name="nome"
+        data-vv-as="usuário"
+        v-validate
+        data-vv-rules="required"
+        type="text"
+        size="50"
+        placeholder="Usuário"
+        v-model="nome"
+        autocomplete="off"
+      />
+      <div>
+        <span class="erro" v-show="errors.has('nome')">{{ errors.first('nome') }}</span>
+      </div>
     </div>
     <div class="margem">
-      <input type="password" placeholder="password" />
+      <input
+        name="senha"
+        data-vv-as="senha"
+        v-validate
+        data-vv-rules="required"
+        type="password"
+        size="50"
+        placeholder="senha"
+        v-model="senha"
+        autocomplete="off"
+      />
+      <div>
+        <span class="erro" v-show="errors.has('senha')">{{ errors.first('senha') }}</span>
+      </div>
     </div>
     <div>
-      <router-link to="/home">
-        <button>Entrar</button>
-      </router-link>
+      <button @click="entrar">Entrar</button>
     </div>
     <div class="margem">
       <router-link to="/alterar-senha">Esqueci minha senha</router-link>
@@ -20,16 +44,37 @@
 </template>
 
 <script>
+import Usuario from "../../services/usuarios";
+
 export default {
   name: "app",
   data() {
     return {
-      titulo: "Login"
+      titulo: "Login",
+      nome: null,
+      senha: null
     };
   },
   methods: {
-    cadastrar() {
-      alert("entrei em outra tela");
+    entrar() {
+      this.$validator.validateAll().then(success => {
+        if (success) {
+          Usuario.login(this.nome, this.senha).then(resposta => {
+            if (resposta) {
+              if (resposta.data.id != null) {
+                this.$router.push({
+                  name: "home",
+                  params: { nome: resposta.data.nome, token: "4d5as4das5d4sa" }
+                });
+              } else {
+                alert("Usuário não registrado");
+              }
+            } else {
+              console.log("Não conseguiu conexão com servidor");
+            }
+          });
+        }
+      });
     }
   }
 };
@@ -58,5 +103,8 @@ input {
 }
 .margem {
   margin-top: 10px;
+}
+.erro {
+  color: red;
 }
 </style>

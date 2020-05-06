@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.central.entity.Usuario;
@@ -31,6 +33,16 @@ public class UsuarioController {
 	@GetMapping("/usuario/get")
 	public Iterable<Usuario> getAllUsuarios() {
 		return usuarioRepository.findAll();
+	}
+	
+	@RequestMapping(path = "/login/get/{nome}/{senha}", method = RequestMethod.GET)
+	public Usuario login(@PathVariable String nome, @PathVariable String senha) {
+		/*if(usuarioRepository.findByLogin(nome, senha) != null) {
+			return "ok";
+		}
+		return "nok";*/
+		System.out.println("retornando " +  usuarioRepository.findByLogin(nome, senha));
+		return usuarioRepository.findByLogin(nome, senha);
 	}
 	
 	@PostMapping("/usuario/post")

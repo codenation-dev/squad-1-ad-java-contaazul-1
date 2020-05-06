@@ -20,5 +20,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	
     @Query(value = "select u.* from usuario u where nome like '%:name%'", nativeQuery = true)
     List<Usuario> findByName(@Param("name") String name);
+    
+    @Query(value = "select u.* from usuario u where nome = 'Larissa' and senha = 'das'", nativeQuery = true)
+    Usuario findByLogin(@Param("nome") String nome, @Param("senha") String senha);
 	
 }

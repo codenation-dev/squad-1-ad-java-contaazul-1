@@ -94,12 +94,11 @@ export default {
   mounted() {
     Erro.listar().then(resErro => {
       this.erros = resErro.data;
+      console.log(resErro);
     });
 
-    //substituir pela info que vem no login
-    Usuario.listar().then(resUsuario => {
-      this.usuario = resUsuario.data[0];
-    });
+    this.usuario.nome = this.$route.params.nome;
+    this.usuario.token = this.$route.params.token;
   },
   computed: {
     filtrarTodosAmbientes() {

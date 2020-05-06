@@ -33,5 +33,11 @@ public class UsuarioService implements UsuarioServiceInterface{
 	public List<Usuario> findByName(String name) {
 		return repository.findByName(name);
 	}
+	
+	@Override
+	public Usuario findByLogin(String name, String senha) {
+		return repository.findByLogin(name, senha);
+	}
+	
 
 }

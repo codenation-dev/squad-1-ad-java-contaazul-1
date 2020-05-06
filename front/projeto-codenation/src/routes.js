@@ -8,6 +8,6 @@ export const routes = [
     { path: '', component: Login, titulo: 'Login' },
     { path: '/cadastro', component: Cadastro, titulo: 'Cadastro' },
     { path: '/alterar-senha', component: AlterarSenha, titulo: 'Alterar Senha' },
-    { path: '/home', component: Home, titulo: 'Home' },
+    { path: '/home', component: Home, titulo: 'Home', name: 'home' },
     { path: '/detalhe-erro', component: DetalheErro, titulo: 'Detalhe erro' }
 ]
