@@ -1,7 +1,6 @@
 package com.central.controller;
 
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.central.entity.Erro;
 import com.central.exception.ResourceNotFoundException;
-import com.central.repository.ErroRepository;
 import com.central.service.ErroService;
 
 
@@ -29,7 +26,6 @@ import com.central.service.ErroService;
 public class ErroController {
 	
 	@Autowired
-	private ErroRepository erroRepository;
 	private ErroService erroService;
 	
 
@@ -54,12 +50,7 @@ public class ErroController {
     @DeleteMapping("/erro/delete/{id}")
     public Map<String, Boolean> deletaErro(@PathVariable(value = "id") Long erroId)
          throws ResourceNotFoundException {
-        Erro erro = erroRepository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
-
-        erroRepository.delete(erro);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return response;
+        return erroService.removeErro(erroId);
     }
 }
 

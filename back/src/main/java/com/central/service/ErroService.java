@@ -1,6 +1,8 @@
 package com.central.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +69,6 @@ public class ErroService implements ErroServiceInterface{
 	}
 
 	public ResponseEntity<Erro> atualizaErro(Long erroId, Erro novoErro) throws ResourceNotFoundException {
-
 		Erro erro = repository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
         erro.setTitulo(novoErro.getTitulo());
         erro.setDetalhes(novoErro.getDetalhes());
@@ -81,5 +82,15 @@ public class ErroService implements ErroServiceInterface{
         return ResponseEntity.ok(erroAtualizado);
 		
 	}
+
+	public Map<String, Boolean> removeErro(Long erroId) throws ResourceNotFoundException{
+		Erro erro = repository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
+        repository.delete(erro);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+        
+        return response;
+	}
+
 
 }

@@ -23,8 +23,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.central.entity.Usuario;
 import com.central.exception.ResourceNotFoundException;
 import com.central.repository.UsuarioRepository;
+import com.central.service.UsuarioService;
 
-@CrossOrigin(origins = "*")
+
 @RestController
 public class UsuarioController {
 	
@@ -32,7 +33,7 @@ public class UsuarioController {
 	private UsuarioRepository usuarioRepository;
 	
 	@GetMapping("/usuario/get")
-	public Iterable<Usuario> getAllUsuarios() {
+	public List<Usuario> getAllUsuarios() {
 		return usuarioRepository.findAll();
 	}
 	

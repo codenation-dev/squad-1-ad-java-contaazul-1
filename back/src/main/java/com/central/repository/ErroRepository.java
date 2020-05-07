@@ -37,4 +37,7 @@ public interface ErroRepository extends CrudRepository<Erro, Long> {
     @Query(value = "select * from erro", nativeQuery = true)
     List<Erro> findAll();
     
+    @Query(value = "delete from erro where id = :id", nativeQuery = true)
+    void delete(@Param("id") Long id);
+    
 }
