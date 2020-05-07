@@ -8,7 +8,8 @@ import mensagem from './pt_BR';
 
 Vue.use(VueRouter);
 const router = new VueRouter({
-  routes: routes
+  routes: routes,
+  mode: 'history'
 });
 
 Vue.use(VueResource);

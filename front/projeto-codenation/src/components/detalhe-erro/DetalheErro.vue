@@ -2,6 +2,7 @@
   <div>
     <div>
       <h1>Bem vindo {{usuario.nome}}. Seu token é {{usuario.token}}</h1>
+      <button @click="logout">Sair</button>
     </div>
     <div>
       <button>Voltar</button>
@@ -45,6 +46,13 @@ export default {
         token: "4d5748sdasd"
       }
     };
+  },
+  methods: {
+    logout() {
+      this.$router.push({
+        name: "login"
+      });
+    }
   }
 };
 </script>

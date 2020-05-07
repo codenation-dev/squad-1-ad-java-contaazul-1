@@ -32,4 +32,5 @@ public interface ErroRepository extends CrudRepository<Erro, Long> {
     
     @Query(value = "select e.* from erro e where e.arquivado = true", nativeQuery = true)
     List<Erro> findNaoArquivados();
+    
 }

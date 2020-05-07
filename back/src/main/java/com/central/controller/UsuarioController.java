@@ -37,11 +37,6 @@ public class UsuarioController {
 	
 	@RequestMapping(path = "/login/get/{nome}/{senha}", method = RequestMethod.GET)
 	public Usuario login(@PathVariable String nome, @PathVariable String senha) {
-		/*if(usuarioRepository.findByLogin(nome, senha) != null) {
-			return "ok";
-		}
-		return "nok";*/
-		System.out.println("retornando " +  usuarioRepository.findByLogin(nome, senha));
 		return usuarioRepository.findByLogin(nome, senha);
 	}
 	

@@ -5,7 +5,7 @@ import Home from './components/home/Home.vue'
 import DetalheErro from './components/detalhe-erro/DetalheErro.vue'
 
 export const routes = [
-    { path: '', component: Login, titulo: 'Login' },
+    { path: '', component: Login, titulo: 'Login', name: 'login' },
     { path: '/cadastro', component: Cadastro, titulo: 'Cadastro' },
     { path: '/alterar-senha', component: AlterarSenha, titulo: 'Alterar Senha' },
     { path: '/home', component: Home, titulo: 'Home', name: 'home' },

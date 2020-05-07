@@ -2,6 +2,7 @@
   <div>
     <label>Bem vindo(a) {{usuario.nome}}.</label>
     <label>Seu token é {{usuario.token}}</label>
+    <button @click="logout">Sair</button>
     <div class="margin">
       <select v-model="ambienteSelecionado">
         <option value>Buscar por</option>
@@ -35,7 +36,7 @@
           <tr
             v-for="erro of descricaoErroFiltro"
             :key="erro.id"
-            v-if="erro.origem == ambienteSelecionado || filtrarTodosAmbientes"
+            v-if="erro.ambiente == ambienteSelecionado || filtrarTodosAmbientes"
           >
             <td>
               <input type="checkbox" />
@@ -61,7 +62,6 @@
 <script>
 import Erro from "../../services/erros";
 import Usuario from "../../services/usuarios";
-import erros from "../../services/erros";
 
 export default {
   data() {
@@ -90,6 +90,13 @@ export default {
         { busca: "origem", descricao: "Origem" }
       ]
     };
+  },
+  methods: {
+    logout() {
+      this.$router.push({
+        name: "login"
+      });
+    }
   },
   mounted() {
     Erro.listar().then(resErro => {

@@ -57,9 +57,9 @@ public class Erro extends AuditModel {
 	@NotNull
 	private boolean arquivado;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+/*	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_usuario",referencedColumnName="id",nullable=false,unique=true)
-	@NotNull
+	@NotNull*/
 	private Usuario usuario;
 	
 	public Erro() {

@@ -24,7 +24,7 @@
           data-vv-as="e-mail"
           v-validate
           data-vv-rules="required"
-          type="text"
+          type="email"
           size="50"
           placeholder="e-mail"
           v-model="usuario.email"
@@ -74,6 +74,11 @@ export default {
   },
   methods: {
     salvar() {
+      if (!this.validEmail(this.usuario.email)) {
+        alert("Informe um email valido");
+        return;
+      }
+
       this.$validator.validateAll().then(success => {
         if (success) {
           Usuario.salvar(this.usuario).then(resposta => {
@@ -83,6 +88,10 @@ export default {
           console.log("Não foi possivel salvar usuario");
         }
       });
+    },
+    validEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(email);
     }
   }
 };
