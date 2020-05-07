@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.central.entity.Erro;
+import com.central.exception.ResourceNotFoundException;
 import com.central.repository.ErroRepository;
 import com.central.service.interfaces.ErroServiceInterface;
 
@@ -57,6 +59,27 @@ public class ErroService implements ErroServiceInterface{
 	@Override
 	public List<Erro> findNaoArquivados() {
 		return repository.findNaoArquivados();
+	}
+	
+	@Override
+	public List<Erro> getAllErros() {
+		return repository.findAll();
+	}
+
+	public ResponseEntity<Erro> atualizaErro(Long erroId, Erro novoErro) throws ResourceNotFoundException {
+
+		Erro erro = repository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
+        erro.setTitulo(novoErro.getTitulo());
+        erro.setDetalhes(novoErro.getDetalhes());
+        erro.setOrigem(novoErro.getOrigem());
+        erro.setNivel(novoErro.getNivel());
+        erro.setAmbiente(novoErro.getAmbiente());
+        erro.setArquivado(novoErro.isArquivado());
+        erro.setUsuario(novoErro.getUsuario());
+        final Erro erroAtualizado = repository.save(erro);
+        
+        return ResponseEntity.ok(erroAtualizado);
+		
 	}
 
 }

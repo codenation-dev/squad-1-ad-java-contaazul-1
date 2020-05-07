@@ -2,6 +2,7 @@ package com.central.controller;
 
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -38,6 +39,11 @@ public class UsuarioController {
 	@RequestMapping(path = "/login/get/{nome}/{senha}", method = RequestMethod.GET)
 	public Usuario login(@PathVariable String nome, @PathVariable String senha) {
 		return usuarioRepository.findByLogin(nome, senha);
+	}
+	
+	@RequestMapping(path = "usuario/get/{nome}", method = RequestMethod.GET)
+	public List<Usuario> findName(@PathVariable String nome) {
+		return usuarioRepository.findByName(nome);
 	}
 	
 	@PostMapping("/usuario/post")

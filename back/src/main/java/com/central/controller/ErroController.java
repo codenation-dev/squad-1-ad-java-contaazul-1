@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.central.entity.Erro;
 import com.central.exception.ResourceNotFoundException;
 import com.central.repository.ErroRepository;
+import com.central.service.ErroService;
 
 
 //@CrossOrigin(origins = "http://localhost:8080")
@@ -29,35 +30,25 @@ public class ErroController {
 	
 	@Autowired
 	private ErroRepository erroRepository;
+	private ErroService erroService;
 	
 
 	@GetMapping("/erro/get")
-	public Iterable<Erro> getAllErros() {
-		System.out.println("erros escrevi " + erroRepository.findAll());
-		return erroRepository.findAll();
+	public List<Erro> getAllErros() {
+		return erroService.getAllErros();
 	}
 	
 	@PostMapping("/erro/post")
 	public Erro registraErro(@Valid @RequestBody Erro erro) {	
 		System.out.println("Novo erro: " + erro.getTitulo()); 
-		return erroRepository.save(erro);
+		return erroService.save(erro);
 
 	}
 	
 	@PutMapping("/erro/put/{id}")
     public ResponseEntity<Erro> atualizaErro(@PathVariable(value = "id") Long erroId,
-         @Valid @RequestBody Erro erroDetalhes) throws ResourceNotFoundException {
-		Erro erro = erroRepository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
-
-        erro.setTitulo(erroDetalhes.getTitulo());
-        erro.setDetalhes(erroDetalhes.getDetalhes());
-        erro.setOrigem(erroDetalhes.getOrigem());
-        erro.setNivel(erroDetalhes.getNivel());
-        erro.setAmbiente(erroDetalhes.getAmbiente());
-        erro.setArquivado(erroDetalhes.isArquivado());
-        erro.setUsuario(erroDetalhes.getUsuario());
-        final Erro erroAtualizado = erroRepository.save(erro);
-        return ResponseEntity.ok(erroAtualizado);
+         @Valid @RequestBody Erro novoErro) throws ResourceNotFoundException{
+		return erroService.atualizaErro(erroId, novoErro);
     }
 
     @DeleteMapping("/erro/delete/{id}")

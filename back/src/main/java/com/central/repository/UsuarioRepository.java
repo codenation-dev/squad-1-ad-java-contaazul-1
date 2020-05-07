@@ -18,7 +18,7 @@ import com.central.entity.Usuario;
 @Component
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	
-    @Query(value = "select u.* from usuario u where nome like '%:name%'", nativeQuery = true)
+    @Query(value = "select u.* from usuario u where nome like %:name%", nativeQuery = true)
     List<Usuario> findByName(@Param("name") String name);
     
     @Query(value = "select u.* from usuario u where nome = :nome and senha = :senha", nativeQuery = true)

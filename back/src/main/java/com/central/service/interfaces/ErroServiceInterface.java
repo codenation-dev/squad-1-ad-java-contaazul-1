@@ -21,4 +21,6 @@ public interface ErroServiceInterface extends ServiceInterface<Erro>{
 	
 	List<Erro> findNaoArquivados();
 
+	List<Erro> getAllErros();
+
 }
