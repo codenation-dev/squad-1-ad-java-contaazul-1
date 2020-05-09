@@ -16,7 +16,7 @@ import com.central.entity.Erro;
 public interface ErroRepository extends CrudRepository<Erro, Long> {
 	
 
-    @Query(value = "select count(id) from erro e where u.descricao like %:name%", nativeQuery = true)
+    @Query(value = "select count(e.id) from erro e where e.descricao = :name", nativeQuery = true)
     Integer frequenciaErros(@Param("name") String name);
     
     @Query(value = "select e.* from erro e where e.level like %:level%", nativeQuery = true)
