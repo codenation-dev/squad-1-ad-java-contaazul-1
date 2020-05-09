@@ -34,6 +34,11 @@ public class ErroController {
 		return erroService.getAllErros();
 	}
 	
+	@RequestMapping(path = "/erro/get/eventos/{titulo}", method = RequestMethod.GET)
+	public Integer eventosErro(@PathVariable String titulo) {
+		return erroService.frequenciaErros(titulo);
+	}
+	
 	@PostMapping("/erro/post")
 	public Erro registraErro(@Valid @RequestBody Erro erro) {	
 		System.out.println("Novo erro: " + erro.getTitulo()); 
