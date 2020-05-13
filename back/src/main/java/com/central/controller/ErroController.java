@@ -14,10 +14,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.central.entity.Erro;
+import com.central.entity.Usuario;
 import com.central.exception.ResourceNotFoundException;
+import com.central.repository.ErroRepository;
 import com.central.service.ErroService;
 
 
@@ -32,6 +36,11 @@ public class ErroController {
 	@GetMapping("/erro/get")
 	public List<Erro> getAllErros() {
 		return erroService.getAllErros();
+	}
+	
+	@RequestMapping(path = "/erro/get/eventos/{titulo}", method = RequestMethod.GET)
+	public Integer eventosErro(@PathVariable String titulo) {
+		return erroService.frequenciaErros(titulo);
 	}
 	
 	@PostMapping("/erro/post")

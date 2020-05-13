@@ -1,10 +1,10 @@
 package com.central.entity;
 
-import java.io.Serializable;
-import java.time.Instant;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,13 +12,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.CreatedDate;
+import com.central.entity.enums.AmbienteErro;
+import com.central.entity.enums.NivelErro;
 
 @Entity
 @Table(name = "erro")
@@ -57,10 +56,10 @@ public class Erro extends AuditModel {
 	@NotNull
 	private boolean arquivado;
 	
-/*	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_usuario",referencedColumnName="id",nullable=false,unique=true)
-	@NotNull*/
-	private Usuario usuario;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_usuario", referencedColumnName="id")
+    @NotNull
+    private Usuario usuario;
 	
 	public Erro() {
 		

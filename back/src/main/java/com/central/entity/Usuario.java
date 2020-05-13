@@ -2,9 +2,9 @@ package com.central.entity;
 
 
 
-import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
 
 
 
@@ -43,7 +44,7 @@ public class Usuario extends AuditModel {
 	@Email
 	private String email;
 	
-    @OneToMany(fetch=FetchType.LAZY,mappedBy = "usuario")
+	@OneToMany(cascade = CascadeType.REMOVE, fetch=FetchType.LAZY, mappedBy = "usuario")
     private Set<Erro> erros;
     
 		

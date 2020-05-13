@@ -50,7 +50,8 @@
               <br />
               {{erro.origem}}
             </td>
-            <td>1</td>
+
+            <td>{{erro.eventos}}</td>
           </tr>
           <tr></tr>
         </tbody>
@@ -71,6 +72,7 @@ export default {
         token: ""
       },
       erros: [],
+      eventosTeste: [],
       ambienteSelecionado: "",
       ordenacaoSelecionada: "",
       buscaSelecionado: "",
@@ -99,14 +101,27 @@ export default {
     }
   },
   mounted() {
-    Erro.listar().then(resErro => {
-      this.erros = resErro.data;
-      console.log(resErro);
-    });
+      Erro.listar().then(resErro => {
+        let errors = resErro.data;
+        let promises = [];
+
+        errors.forEach(erro => {
+          promises.push(
+            Erro.eventos(erro.titulo).then(resposta => {
+              erro.eventos = resposta.data;
+            })
+          )
+        });
+
+        Promise.all(promises).then(() => {
+          this.erros = errors;
+        });
+      });
 
     this.usuario.nome = this.$route.params.nome;
     this.usuario.token = this.$route.params.token;
   },
+
   computed: {
     filtrarTodosAmbientes() {
       return (
@@ -206,5 +221,8 @@ input {
 label {
   font-size: 20px;
   margin-top: 10px;
+}
+li {
+  list-style: none;
 }
 </style>
