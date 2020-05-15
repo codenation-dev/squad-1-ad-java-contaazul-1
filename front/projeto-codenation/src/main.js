@@ -5,6 +5,8 @@ import VueRouter from 'vue-router';
 import { routes } from './routes';
 import VeeValidate from 'vee-validate';
 import mensagem from './pt_BR';
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 Vue.use(VueRouter);
 const router = new VueRouter({
