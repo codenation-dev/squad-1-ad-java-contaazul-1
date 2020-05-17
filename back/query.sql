@@ -1,10 +1,12 @@
 CREATE TABLE "usuario" (
   "id" SERIAL PRIMARY KEY,
-  "nome" varchar(100),
+  "name" varchar(100),
+  "username" varchar(50),
   "email" varchar(100),
-  "senha" varchar(255),
+  "password" varchar(255),
   "created_at" timestamp,
-  "updated_at" timestamp
+  "updated_at" timestamp,
+  FOREIGN KEY(role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE "erro" (
@@ -18,4 +20,10 @@ CREATE TABLE "erro" (
   "created_at" timestamp,
   "updated_at" timestamp,
    FOREIGN KEY ("id_usuario") REFERENCES "usuario" ("id")
+);
+
+CREATE TABLE "roles" (
+  "id" SERIAL PRIMARY KEY,
+  "role_name" varchar(60)
+
 );

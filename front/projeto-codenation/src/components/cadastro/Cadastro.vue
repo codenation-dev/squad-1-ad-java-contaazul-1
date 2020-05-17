@@ -20,6 +20,22 @@
       </div>
       <div class="margem">
         <input
+          name="username"
+          data-vv-as="username"
+          v-validate
+          data-vv-rules="required"
+          type="text"
+          size="50"
+          placeholder="username"
+          v-model="usuario.username"
+          autocomplete="off"
+        />
+        <div>
+          <span class="erro" v-show="errors.has('username')">{{ errors.first('username') }}</span>
+        </div>
+      </div>
+      <div class="margem">
+        <input
           name="email"
           data-vv-as="e-mail"
           v-validate

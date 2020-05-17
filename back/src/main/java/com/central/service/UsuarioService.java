@@ -44,6 +44,12 @@ public class UsuarioService implements UsuarioServiceInterface{
 	public List<Usuario> getAllUsuarios() {
 		return repository.findAll();
 	}
+
+	public String alterarSenha(String email, String senhaAntiga, String senhaNova1, String senhaNova2) {
+		if(!senhaNova1.equals(senhaNova2)) return "Senhas incompatíveis";
+		
+		return null;
+	}
 	
 
 }

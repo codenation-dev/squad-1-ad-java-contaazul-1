@@ -31,25 +31,34 @@ public class UsuarioController {
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/usuario/get")
 	public List<Usuario> getAllUsuarios() {
 		return usuarioRepository.findAll();
 	}
 	
-	@RequestMapping(path = "/login/get/{nome}/{senha}", method = RequestMethod.GET)
-	public Usuario login(@PathVariable String nome, @PathVariable String senha) {
-		return usuarioRepository.findByLogin(nome, senha);
+	@RequestMapping(path = "/login/get/{name}/{password}", method = RequestMethod.GET)
+	public Usuario login(@PathVariable String name, @PathVariable String password) {
+		return usuarioRepository.findByLogin(name, password);
 	}
 	
-	@RequestMapping(path = "usuario/get/{nome}", method = RequestMethod.GET)
+	@RequestMapping(path = "usuario/get/{name}", method = RequestMethod.GET)
 	public List<Usuario> findName(@PathVariable String nome) {
 		return usuarioRepository.findByName(nome);
 	}
 	
+	@RequestMapping(path = "usuario/alterarsenha/{email}/{senhaAntiga}{senhaNova1}/{senhaNova2}", method = RequestMethod.GET)
+	public String alterarSenha(@PathVariable String email, @PathVariable String senhaAntiga, 
+			@PathVariable String senhaNova1, @PathVariable String senhaNova2) {
+		if(!senhaNova1.contentEquals(senhaNova2)) return "Senhas incompativeis";
+		else return usuarioService.alterarSenha(email, senhaAntiga, senhaNova1, senhaNova2);
+	}
+	
 	@PostMapping("/usuario/post")
 	public Usuario registraUsuario(@Valid @RequestBody Usuario usuario) {	
-		System.out.println("Novo usuario: " + usuario.getNome()); 
+		System.out.println("Novo usuario: " + usuario.getName()); 
 		return usuarioRepository.save(usuario);
 
 	}
@@ -58,8 +67,8 @@ public class UsuarioController {
     public ResponseEntity<Usuario> atualizaUsuario(@PathVariable(value = "id") Long usuarioId,
          @Valid @RequestBody Usuario usuarioDetalhes) throws ResourceNotFoundException {
 		Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado para o id " + usuarioId));
-        usuario.setNome(usuarioDetalhes.getNome());
-        usuario.setSenha(usuarioDetalhes.getSenha());
+        usuario.setName(usuarioDetalhes.getName());
+        usuario.setPassword(usuarioDetalhes.getPassword());
         usuario.setEmail(usuarioDetalhes.getEmail());
         final Usuario usuarioAtualizado = usuarioRepository.save(usuario);
         return ResponseEntity.ok(usuarioAtualizado);

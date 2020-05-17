@@ -2,6 +2,7 @@ package com.central.repository;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -26,4 +27,10 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     
     @Query(value = "select * from usuario", nativeQuery = true)
     List<Usuario> findAll();
+    
+    Optional<Usuario> findByUsername(String username);
+    Boolean existsByUsername(String username);
+    Boolean existsByEmail(String email);
+
+	String alterarSenha(String email, String senhaAntiga, String senhaNova1, String senhaNova2);
 }

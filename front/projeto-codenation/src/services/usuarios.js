@@ -10,11 +10,13 @@ export default {
 	},
 
 	salvar: (usuario) => {
-		return http.post('usuario/post',
+		return http.post('api/auth/signup',
 			{
-				nome: usuario.nome,
+				name: usuario.nome,
+				username: usuario.username,
 				email: usuario.email,
-				senha: usuario.senha
+				role: ["user"],
+				password: usuario.senha
 			}
 		)
 	}
