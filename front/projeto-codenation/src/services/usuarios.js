@@ -5,8 +5,13 @@ export default {
 		return http.get('usuario/get')
 	},
 
-	login: (nome, senha) => {
-		return http.get('login/get/' + nome + '/' + senha)
+	login: (username, senha) => {
+		return http.post('api/auth/signin',
+			{
+				username: username,
+				password: senha
+			}
+		)
 	},
 
 	salvar: (usuario) => {

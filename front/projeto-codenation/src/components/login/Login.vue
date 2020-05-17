@@ -61,6 +61,7 @@ export default {
         if (success) {
           Usuario.login(this.nome, this.senha).then(resposta => {
             if (resposta) {
+              console.log(resposta)
               if (resposta.data.id != null) {
                 this.$router.push({
                   name: "home",

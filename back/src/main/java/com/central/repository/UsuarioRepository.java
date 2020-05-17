@@ -19,11 +19,11 @@ import com.central.entity.Usuario;
 @Component
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	
-    @Query(value = "select u.* from usuario u where nome like %:name%", nativeQuery = true)
+    @Query(value = "select u.* from usuario u where name like %:name%", nativeQuery = true)
     List<Usuario> findByName(@Param("name") String name);
     
-    @Query(value = "select u.* from usuario u where nome = :nome and senha = :senha", nativeQuery = true)
-    Usuario findByLogin(@Param("nome") String nome, @Param("senha") String senha);
+    @Query(value = "select u.* from usuario u where name = :name and password = :password", nativeQuery = true)
+    Usuario findByLogin(@Param("name") String nome, @Param("password") String senha);
     
     @Query(value = "select * from usuario", nativeQuery = true)
     List<Usuario> findAll();
@@ -32,5 +32,12 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
 
-	String alterarSenha(String email, String senhaAntiga, String senhaNova1, String senhaNova2);
+    @Query(value = "select u.password from usuario u where u.email = :email", nativeQuery = true)
+	String findSenha(String email);
+
+    @Query(value = "select u.email from usuario u where u.email = :email", nativeQuery = true)
+	String findEmail(String email);
+
+    @Query(value = "update usuario set password = :senhaNova1 where email = :email", nativeQuery = true)
+	String alterarSenha(String email, String senhaNova1);
 }

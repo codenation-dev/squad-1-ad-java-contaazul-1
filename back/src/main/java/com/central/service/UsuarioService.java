@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.central.entity.Erro;
@@ -16,6 +17,9 @@ import lombok.AllArgsConstructor;
 @Service
 @AllArgsConstructor
 public class UsuarioService implements UsuarioServiceInterface{
+	
+    @Autowired
+    PasswordEncoder encoder;
 
 	@Autowired(required=false)
 	private UsuarioRepository repository;
@@ -46,9 +50,13 @@ public class UsuarioService implements UsuarioServiceInterface{
 	}
 
 	public String alterarSenha(String email, String senhaAntiga, String senhaNova1, String senhaNova2) {
+		if(!repository.findEmail(email).equals(email)) return "email nao cadastrado";
 		if(!senhaNova1.equals(senhaNova2)) return "Senhas incompatíveis";
+	    String senhaNovaCrip = encoder.encode(senhaNova1);
+	    String senhaAntigaCrip = encoder.encode(senhaAntiga);
+		if (!repository.findSenha(email).equals(senhaAntigaCrip)) return "Senha incorreta";
+		return repository.alterarSenha(email, senhaNovaCrip);
 		
-		return null;
 	}
 	
 
