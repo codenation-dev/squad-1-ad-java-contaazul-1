@@ -1,75 +1,87 @@
 <template>
   <div id="cadastro" class="centralizado">
-    <h1>{{ titulo }}</h1>
-    <form @submit.prevent="salvar">
-      <div class="margem">
-        <input
-          name="nome"
-          data-vv-as="nome"
-          v-validate
-          data-vv-rules="required"
-          type="text"
-          size="50"
-          placeholder="nome"
-          v-model="usuario.nome"
-          autocomplete="off"
-        />
-        <div>
-          <span class="erro" v-show="errors.has('nome')">{{ errors.first('nome') }}</span>
+    <div class="container">
+      <div style="width: 340px; margin: 50px auto;">
+        <div
+          style="margin-bottom: 15px; background: #f7f7f7; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); padding: 30px;"
+        >
+          <h2 class="text-center" style="margin: 0 0 15px;">{{ titulo }}</h2>
+          <form @submit.prevent="salvar">
+            <div class="form-group">
+              <input
+                class="form-control"
+                name="nome"
+                data-vv-as="nome"
+                v-validate
+                data-vv-rules="required"
+                type="text"
+                size="50"
+                placeholder="Nome"
+                v-model="usuario.nome"
+                autocomplete="off"
+              />
+              <div>
+                <span class="erro" v-show="errors.has('nome')">{{ errors.first('nome') }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                class="form-control"
+                name="username"
+                data-vv-as="username"
+                v-validate
+                data-vv-rules="required"
+                type="text"
+                size="50"
+                placeholder="Nome de usuário"
+                v-model="usuario.username"
+                autocomplete="off"
+              />
+              <div>
+                <span class="erro" v-show="errors.has('username')">{{ errors.first('username') }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                class="form-control"
+                name="email"
+                data-vv-as="e-mail"
+                v-validate
+                data-vv-rules="required"
+                type="email"
+                size="50"
+                placeholder="E-mail"
+                v-model="usuario.email"
+                autocomplete="off"
+              />
+              <div>
+                <span class="erro" v-show="errors.has('email')">{{ errors.first('email') }}</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <input
+                class="form-control"
+                name="senha"
+                data-vv-as="senha"
+                v-validate
+                data-vv-rules="required"
+                type="password"
+                size="50"
+                placeholder="Senha"
+                v-model="usuario.senha"
+                autocomplete="off"
+              />
+              <div>
+                <span class="erro" v-show="errors.has('senha')">{{ errors.first('senha') }}</span>
+              </div>
+            </div>
+            <div class="margem">
+              <button class="btn btn-primary btn-block">Cadastrar</button>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="margem">
-        <input
-          name="username"
-          data-vv-as="username"
-          v-validate
-          data-vv-rules="required"
-          type="text"
-          size="50"
-          placeholder="username"
-          v-model="usuario.username"
-          autocomplete="off"
-        />
-        <div>
-          <span class="erro" v-show="errors.has('username')">{{ errors.first('username') }}</span>
-        </div>
-      </div>
-      <div class="margem">
-        <input
-          name="email"
-          data-vv-as="e-mail"
-          v-validate
-          data-vv-rules="required"
-          type="email"
-          size="50"
-          placeholder="e-mail"
-          v-model="usuario.email"
-          autocomplete="off"
-        />
-        <div>
-          <span class="erro" v-show="errors.has('email')">{{ errors.first('email') }}</span>
-        </div>
-      </div>
-      <div class="margem">
-        <input
-          name="senha"
-          data-vv-as="senha"
-          v-validate
-          data-vv-rules="required"
-          type="password"
-          size="50"
-          placeholder="senha"
-          v-model="usuario.senha"
-          autocomplete="off"
-        />
-        <div>
-          <span class="erro" v-show="errors.has('senha')">{{ errors.first('senha') }}</span>
-        </div>
-      </div>
-      <div class="margem">
-        <button>Cadastrar</button>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -114,35 +126,6 @@ export default {
 </script>
 
 <style>
-.centralizado {
-  text-align: center;
-}
-
-.margem {
-  margin-top: 10px;
-}
-.inline {
-  margin-top: 50px;
-  display: inline;
-}
-
-button {
-  border-radius: 4px;
-  font-size: 15px;
-  padding: 10px 20px;
-  text-align: center;
-  color: white;
-  margin-top: 10px;
-  background-color: blue;
-  width: 15%;
-}
-input {
-  font-size: 15px;
-  padding: 8px 10px;
-  text-align: left;
-  color: black;
-  width: 50%;
-}
 .erro {
   color: red;
 }
