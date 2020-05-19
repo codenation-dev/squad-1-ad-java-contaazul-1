@@ -4,6 +4,7 @@ package com.central.repository;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
@@ -38,6 +39,10 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
     @Query(value = "select u.email from usuario u where u.email = :email", nativeQuery = true)
 	String findEmail(String email);
 
+    @Modifying 
     @Query(value = "update usuario set password = :senhaNova1 where email = :email", nativeQuery = true)
-	String alterarSenha(String email, String senhaNova1);
+	void alterarSenha(String email, String senhaNova1);
+    
+     
+    
 }

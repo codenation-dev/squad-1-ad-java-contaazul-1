@@ -1,21 +1,36 @@
 <template>
-  <div class="centralizado">
-    <h1>{{titulo}}</h1>
-    <div>
-      <label>{{senhaAtual}}</label>
-      <input type="text" />
-    </div>
-    <div class="margem">
-      <label>{{novaSenha}}</label>
-      <input type="text" />
-    </div>
-    <div class="margem">
-      <label>{{confirmacao}}</label>
-      <input type="text" />
-    </div>
-    <div>
-      <button class="ok">Ok</button>
-      <button class="cancelar">Cancelar</button>
+  <div>
+    <div class="container">
+      <div style="width: 340px; margin: 50px auto;">
+        <div
+          style="margin-bottom: 15px; background: #f7f7f7; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); padding: 30px;"
+        >
+          <h2 class="text-center" style="margin: 0 0 15px;">{{ titulo }}</h2>
+          <div class="form-group">
+            <input class="form-control" name="email" placeholder="E-mail" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control"
+              name="senhaAntiga"
+              placeholder="Senha Antiga"
+              autocomplete="off"
+            />
+          </div>
+          <div class="form-group">
+            <input
+              class="form-control"
+              name="senhaNova"
+              placeholder="Senha nova"
+              autocomplete="off"
+            />
+          </div>
+          <div class="centralizado">
+            <button class="btn btn-success">Confirmar</button>
+            <button class="btn btn-danger">Cancelar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -23,10 +38,7 @@
 export default {
   data() {
     return {
-      titulo: "Trocar senha",
-      senhaAtual: "Senha Atual:",
-      novaSenha: "Nova senha:",
-      confirmacao: "Confirmação:"
+      titulo: "Alterar senha"
     };
   }
 };
@@ -34,33 +46,5 @@ export default {
 <style>
 .centralizado {
   text-align: center;
-}
-input {
-  font-size: 15px;
-  padding: 8px 15px;
-  text-align: left;
-  color: black;
-  width: 50%;
-}
-button {
-  border-radius: 4px;
-  font-size: 15px;
-  padding: 10px 20px;
-  text-align: center;
-  color: white;
-  margin-top: 10px;
-}
-
-label {
-  font-size: 20px;
-}
-.ok {
-  background-color: #4caf50;
-}
-.cancelar {
-  background-color: #f44336;
-}
-.margem {
-  margin-top: 10px;
 }
 </style>

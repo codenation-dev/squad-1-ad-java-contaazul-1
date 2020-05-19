@@ -50,12 +50,12 @@ public class UsuarioService implements UsuarioServiceInterface{
 	}
 
 	public String alterarSenha(String email, String senhaAntiga, String senhaNova1, String senhaNova2) {
-		if(!repository.findEmail(email).equals(email)) return "email nao cadastrado";
+		if(!repository.findEmail(email).equals(email)) return "Email nao cadastrado";
 		if(!senhaNova1.equals(senhaNova2)) return "Senhas incompatíveis";
-	    String senhaNovaCrip = encoder.encode(senhaNova1);
-	    String senhaAntigaCrip = encoder.encode(senhaAntiga);
-		if (!repository.findSenha(email).equals(senhaAntigaCrip)) return "Senha incorreta";
-		return repository.alterarSenha(email, senhaNovaCrip);
+		if (!encoder.matches(senhaAntiga, repository.findSenha(email))) return "Senha antiga incorreta";
+		String senhaNovaCrip = encoder.encode(senhaNova1);
+		repository.alterarSenha(email, senhaNovaCrip);
+		return "Senha atualizada" + senhaNovaCrip;
 		
 	}
 	
