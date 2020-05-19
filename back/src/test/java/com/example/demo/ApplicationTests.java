@@ -171,7 +171,6 @@ class ApplicationTests {
 	
 	@Test
 	void signInWhenIncorrectPassword_thenReturnsBadRequest() throws Exception {		
-		
         String contentInput = "{\"username\": \"paulinha\", \"password\": \"aasd\"}";
         Usuario paula = new Usuario();
         paula.setUsername("paulinha");
