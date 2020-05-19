@@ -40,7 +40,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc(addFilters = false)
 @EnableWebMvc
-class ApplicationTests {
+class AuthRestAPIsTests {
 	
 		//https://dzone.com/articles/rest-endpoint-testing-with-mockmvc
 		
