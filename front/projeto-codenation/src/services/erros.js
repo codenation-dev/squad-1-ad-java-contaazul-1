@@ -1,11 +1,11 @@
-import {http} from './config'
+import { http } from './config'
 
 export default {
-	listar:() => {
-		return http.get('erro/get')
+	listar: () => {
+		return http.get('erro/get/')
 	},
 
-	eventos:(titulo) => {
+	eventos: (titulo) => {
 		return http.get('erro/get/eventos/' + titulo)
 	}
 
