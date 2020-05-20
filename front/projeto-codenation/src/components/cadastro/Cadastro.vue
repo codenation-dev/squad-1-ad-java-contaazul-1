@@ -112,6 +112,9 @@ export default {
         if (success) {
           Usuario.salvar(this.usuario).then(resposta => {
             console.log("Salvo com sucesso");
+              this.$router.push({
+                name: "login"
+              });
           });
         } else {
           console.log("Não foi possivel salvar usuario");

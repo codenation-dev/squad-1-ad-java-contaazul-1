@@ -51,6 +51,7 @@
   </div>
 </template>
 <script>
+ import Erro from "../../services/erros";
 export default {
   data() {
     return {
@@ -59,7 +60,8 @@ export default {
       usuario: {
         nome: "Atari",
         token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdGFyaSIsImlhdCI6MTU4OTk0MDEwMg"
-      }
+      },
+      erros: null
     };
   },
   methods: {
@@ -75,6 +77,11 @@ export default {
     //this.usuario.token = this.$route.params.token;
 
     console.log(this.idErro);
+
+    Erro.listarErro(this.idErro).then(resErro => {
+              let errors = resErro.data
+              //this.erros = errors
+          })
   }
 };
 </script>

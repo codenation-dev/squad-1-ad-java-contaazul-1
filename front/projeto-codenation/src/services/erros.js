@@ -15,6 +15,10 @@ export default {
 				Authorization: 'Bearer ' + token
 			}
 		})
+	},
+
+	listarErro:(idErro)=>{
+		return http.get('erro/get/' + idErro)
 	}
 
 }

@@ -3,6 +3,7 @@ package com.central.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -36,6 +37,11 @@ public class ErroController {
 	@GetMapping("/erro/get")
 	public List<Erro> getAllErros() {
 		return erroService.getAllErros();
+	}
+	
+	@GetMapping("/erro/get/{id}")
+	public Optional<Erro> getErro(@PathVariable Long id) {
+		return erroService.findById(id);
 	}
 	
 	@RequestMapping(path = "/erro/get/eventos/{titulo}", method = RequestMethod.GET)
