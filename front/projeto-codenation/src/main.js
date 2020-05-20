@@ -7,6 +7,7 @@ import VeeValidate from 'vee-validate';
 import mensagem from './pt_BR';
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/logout.css';
+import './css/estilos.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';

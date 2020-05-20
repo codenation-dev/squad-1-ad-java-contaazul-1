@@ -25,5 +25,14 @@ export default {
 				password: usuario.senha
 			}
 		)
+	},
+	alterarSenha: (email, senhaAntiga, senhaNova1, senhaNova2) => {
+		return http.get('usuario/alterarsenha/' + email + '/' + senhaAntiga + '/' + senhaNova1 + '/' + senhaNova2,
+			{
+				email: email,
+				senhaAntiga: senhaAntiga,
+				senhaNova1: senhaNova1,
+				senhaNova2: senhaNova2
+			})
 	}
 }
