@@ -1,13 +1,20 @@
 import { http } from './config'
 
 export default {
-	listar: () => {
-		return http.get('erro/get/')
+	listar: (token) => {
+		return http.get('erro/get/', {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
 	},
 
-	eventos: (titulo) => {
-		return http.get('erro/get/eventos/' + titulo)
+	eventos: (titulo, token) => {
+		return http.get('erro/get/eventos/' + titulo, {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
 	}
 
 }
-

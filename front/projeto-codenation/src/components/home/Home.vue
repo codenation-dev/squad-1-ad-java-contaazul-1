@@ -115,13 +115,17 @@ export default {
     }
   },
   mounted() {
-    Erro.listar().then(resErro => {
+
+    this.usuario.nome = this.$route.params.nome;
+    this.usuario.token = this.$route.params.token;
+
+    Erro.listar(this.usuario.token).then(resErro => {
       let errors = resErro.data;
       let promises = [];
 
       errors.forEach(erro => {
         promises.push(
-          Erro.eventos(erro.titulo).then(resposta => {
+          Erro.eventos(erro.titulo, this.usuario.token).then(resposta => {
             erro.eventos = resposta.data;
           })
         );
@@ -132,8 +136,7 @@ export default {
       });
     });
 
-    this.usuario.nome = this.$route.params.nome;
-    this.usuario.token = this.$route.params.token;
+
   },
 
   computed: {
