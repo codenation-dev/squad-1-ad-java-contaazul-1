@@ -45,15 +45,15 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping(path = "usuario/get/{name}", method = RequestMethod.GET)
-	public List<Usuario> findName(@PathVariable String nome) {
-		return usuarioRepository.findByName(nome);
+	public List<Usuario> findName(@PathVariable String name) {
+		return usuarioRepository.findByName(name);
 	}
 	
-	@RequestMapping(path = "usuario/alterarsenha/{email}/{senhaAntiga}{senhaNova1}/{senhaNova2}", method = RequestMethod.GET)
+	@RequestMapping(path = "usuario/alterarsenha/{email}/{senhaAntiga}/{senhaNova1}/{senhaNova2}", method = RequestMethod.GET)
 	public String alterarSenha(@PathVariable String email, @PathVariable String senhaAntiga, 
 			@PathVariable String senhaNova1, @PathVariable String senhaNova2) {
-		if(!senhaNova1.contentEquals(senhaNova2)) return "Senhas incompativeis";
-		else return usuarioService.alterarSenha(email, senhaAntiga, senhaNova1, senhaNova2);
+		System.out.println("oiiiii");
+		return usuarioService.alterarSenha(email, senhaAntiga, senhaNova1, senhaNova2);
 	}
 	
 	@PostMapping("/usuario/post")
