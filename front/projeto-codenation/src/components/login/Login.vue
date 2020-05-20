@@ -73,10 +73,15 @@ export default {
         if (success) {
           Usuario.login(this.nome, this.senha).then(resposta => {
             if (resposta) {
-              if (resposta.data.id != null) {
+              console.log(resposta);
+
+              if (resposta.data.accessToken != null) {
                 this.$router.push({
                   name: "home",
-                  params: { nome: resposta.data.nome, token: "4d5as4das5d4sa" }
+                  params: {
+                    nome: this.nome,
+                    token: resposta.data.accessToken
+                  }
                 });
               } else {
                 alert("Usuário não registrado");

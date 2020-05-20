@@ -1,26 +1,40 @@
 <template>
   <div>
-    <label>Bem vindo(a) {{usuario.nome}}.</label>
-    <label>Seu token é {{usuario.token}}</label>
-    <button @click="logout">Sair</button>
-    <div class="margin">
-      <select v-model="ambienteSelecionado">
+    <div class="justify-content-between row">
+      <div>
+        <label>Bem vindo(a) {{usuario.nome}}.</label>
+        <label>
+          Seu token é
+          <small>{{usuario.token}}</small>
+        </label>
+      </div>
+      <button @click="logout">
+        <i class="fas fa-sign-out-alt"></i>
+      </button>
+    </div>
+    <div class="justify-content-around mt-4 row">
+      <select v-model="ambienteSelecionado" class="col-2">
         <option value>Buscar por</option>
         <option v-for="ambiente in ambientes" :value="ambiente.tipo">{{ ambiente.descricao }}</option>
       </select>
-      <select v-model="ordenacaoSelecionada">
+      <select v-model="ordenacaoSelecionada" class="col-2">
         <option value disabled>Ordenar Por</option>
         <option v-for="ordem in ordenacao" :value="ordem.tipo">{{ ordem.descricao}}</option>
       </select>
-      <select v-model="buscaSelecionado">
+      <select v-model="buscaSelecionado" class="col-2">
         <option value disabled>Buscar Por</option>
         <option v-for="buscar in filtroBuscar" :value="buscar.busca">{{ buscar.descricao }}</option>
       </select>
-      <input type="search" @input="filtro = $event.target.value" placeholder="Buscar por" />
+      <input
+        type="search"
+        @input="filtro = $event.target.value"
+        placeholder="Buscar por"
+        class="col-5"
+      />
     </div>
     <div>
-      <button class="arquivar">Arquivar</button>
-      <button class="deletar">Apagar</button>
+      <button class="btn btn-success">Arquivar</button>
+      <button class="btn btn-danger">Apagar</button>
     </div>
     <div>
       <table>
@@ -101,22 +115,22 @@ export default {
     }
   },
   mounted() {
-      Erro.listar().then(resErro => {
-        let errors = resErro.data;
-        let promises = [];
+    Erro.listar().then(resErro => {
+      let errors = resErro.data;
+      let promises = [];
 
-        errors.forEach(erro => {
-          promises.push(
-            Erro.eventos(erro.titulo).then(resposta => {
-              erro.eventos = resposta.data;
-            })
-          )
-        });
-
-        Promise.all(promises).then(() => {
-          this.erros = errors;
-        });
+      errors.forEach(erro => {
+        promises.push(
+          Erro.eventos(erro.titulo).then(resposta => {
+            erro.eventos = resposta.data;
+          })
+        );
       });
+
+      Promise.all(promises).then(() => {
+        this.erros = errors;
+      });
+    });
 
     this.usuario.nome = this.$route.params.nome;
     this.usuario.token = this.$route.params.token;
@@ -195,15 +209,6 @@ button {
   text-align: center;
   color: white;
   margin-top: 10px;
-}
-.arquivar {
-  background-color: #4caf50;
-}
-.deletar {
-  background-color: #f44336;
-}
-.margin {
-  margin-top: 20px;
 }
 select {
   font-size: 15px;

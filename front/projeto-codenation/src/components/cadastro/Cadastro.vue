@@ -95,6 +95,7 @@ export default {
       titulo: "Cadastro",
       usuario: {
         nome: null,
+        username: null,
         email: null,
         senha: null
       }

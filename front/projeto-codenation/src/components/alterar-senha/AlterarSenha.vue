@@ -26,8 +26,8 @@
             />
           </div>
           <div class="centralizado">
-            <button class="btn btn-success">Confirmar</button>
-            <button class="btn btn-danger">Cancelar</button>
+            <button class="btn btn-success col-sm-5">Confirmar</button>
+            <button class="btn btn-danger col-sm-5">Cancelar</button>
           </div>
         </div>
       </div>
