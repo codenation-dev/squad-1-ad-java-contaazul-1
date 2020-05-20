@@ -8,8 +8,9 @@
           <small>{{usuario.token}}</small>
         </label>
       </div>
+
       <button @click="logout">
-        <i class="fas fa-sign-out-alt"></i>
+        <i class="gg-log-out corLogout"></i>
       </button>
     </div>
     <div class="justify-content-around mt-4 row">
@@ -44,6 +45,7 @@
             <th>Nivel</th>
             <th>Log</th>
             <th>Eventos</th>
+            <th>Detalhe Erro</th>
           </tr>
         </thead>
         <tbody>
@@ -66,6 +68,11 @@
             </td>
 
             <td>{{erro.eventos}}</td>
+            <td>
+              <router-link
+                :to="{ name: 'detalhe', params: { id: erro.id, usuario: usuario.nome, token: usuario.token  }}"
+              >Detalhe erro</router-link>
+            </td>
           </tr>
           <tr></tr>
         </tbody>
@@ -109,6 +116,11 @@ export default {
   },
   methods: {
     logout() {
+      this.$router.push({
+        name: "login"
+      });
+    },
+    detalheErro() {
       this.$router.push({
         name: "login"
       });
@@ -209,6 +221,9 @@ button {
   text-align: center;
   color: white;
   margin-top: 10px;
+}
+.corLogout {
+  color: blue;
 }
 select {
   font-size: 15px;

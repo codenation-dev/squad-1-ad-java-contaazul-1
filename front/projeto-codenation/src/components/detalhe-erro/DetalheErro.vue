@@ -1,38 +1,51 @@
 <template>
   <div>
-    <div>
-      <h1>Bem vindo {{usuario.nome}}. Seu token é {{usuario.token}}</h1>
-      <button @click="logout">Sair</button>
-    </div>
-    <div>
-      <button>Voltar</button>
-    </div>
-    <div class="erro">
-      <label>Erro no 127.0.0.1 em 13/04/2020 10:15</label>
-    </div>
-    <div>
-      <div class="margin">
+    <div class="justify-content-between row">
+      <div>
         <div>
-          <label>Título</label>
+          <label class="mr-4">Bem vindo(a) {{usuario.nome}}.</label>
+
+          <button @click="logout">
+            <i class="gg-log-out corLogout"></i>
+          </button>
         </div>
-        <label>dasdadasdasdadasdadasdasda</label>
-      </div>
-      <div class="direita">
-        <label>Erro</label>
-        <label>Eventos</label>
-        <label>1000</label>
+        <label>
+          Seu token é
+          <small>{{usuario.token}}</small>
+        </label>
       </div>
     </div>
-    <div>
-      <div class="margin">
-        <div>
-          <label>Detalhes</label>
-        </div>
-        <label>dasdadasdasdadasdadasdasda</label>
+    <div class="jumbotron">
+      <div class="erro">
+        <label>Erro no 127.0.0.1 em 13/04/2020 10:15</label>
       </div>
-      <div class="direita">
-        <label>Coletado por</label>
-        <label>Aqui passa token</label>
+      <div>
+        <div class="margin">
+          <div>
+            <label>Título</label>
+          </div>
+          <label>dasdadasdasdadasdadasdasda</label>
+        </div>
+        <div class="direita">
+          <label>Erro</label>
+          <label>Eventos</label>
+          <label>1000</label>
+        </div>
+      </div>
+      <div>
+        <div class="margin">
+          <div>
+            <label>Detalhes</label>
+          </div>
+          <label>dasdadasdasdadasdadasdasda</label>
+        </div>
+        <div class="direita">
+          <label>Coletado por</label>
+          <label>Aqui passa token</label>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-info btn-block" style="width: 200px aling: center">Voltar</button>
       </div>
     </div>
   </div>
@@ -41,9 +54,11 @@
 export default {
   data() {
     return {
+      idErro: null,
+      erro: {},
       usuario: {
-        nome: "Larissa",
-        token: "4d5748sdasd"
+        nome: "Atari",
+        token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdGFyaSIsImlhdCI6MTU4OTk0MDEwMg"
       }
     };
   },
@@ -53,6 +68,13 @@ export default {
         name: "login"
       });
     }
+  },
+  mounted() {
+    this.idErro = this.$route.params.id;
+    //this.usuario.nome = this.$route.params.usuario;
+    //this.usuario.token = this.$route.params.token;
+
+    console.log(this.idErro);
   }
 };
 </script>
@@ -67,5 +89,8 @@ export default {
 }
 .direita {
   float: right;
+}
+.corLogout {
+  color: blue;
 }
 </style>
