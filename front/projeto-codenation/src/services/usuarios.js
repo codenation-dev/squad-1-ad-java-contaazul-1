@@ -2,7 +2,7 @@ import { http } from './config'
 
 export default {
 	listar: () => {
-		return http.get('usuario/get')
+		return http.get('usuario/')
 	},
 
 
