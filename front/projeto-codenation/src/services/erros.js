@@ -17,15 +17,15 @@ export default {
 		})
 	},
 
-	listarErro:(idErro)=>{
+	listarErro: (idErro) => {
 		return http.get('erro/get/' + idErro)
 	},
 
-	arquivarErro:(errosId)=>{
+	arquivarErro: (errosId) => {
 		return http.put('erro/arquivarErro/' + errosId)
 	},
 
-	deletarErro:(errosId)=>{
+	deletarErro: (errosId) => {
 		return http.delete('erro/deleteErros/' + errosId)
 	}
 

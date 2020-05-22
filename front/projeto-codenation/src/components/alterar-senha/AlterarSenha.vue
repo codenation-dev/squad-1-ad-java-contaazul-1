@@ -108,6 +108,9 @@ export default {
           Usuario.alterarSenha(this.usuario).then(resposta => {
             if (resposta) {
               console.log(resposta);
+              this.$router.push({
+                name: "login"
+              });
             }
           });
         }

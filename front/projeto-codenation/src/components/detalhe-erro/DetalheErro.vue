@@ -1,11 +1,10 @@
 <template>
   <div>
-    <div class="justify-content-between row">
+    <div class="justify-content-between row col-md-12">
       <div>
         <div>
           <label class="mr-4">Bem vindo(a) {{usuario.nome}}.</label>
-
-          <button @click="logout">
+          <button @click="logout" class="botaoLogout">
             <i class="gg-log-out corLogout"></i>
           </button>
         </div>
@@ -45,13 +44,13 @@
         </div>
       </div>
       <div>
-        <button class="btn btn-info btn-block" style="width: 200px aling: center">Voltar</button>
+        <button class="btn btn-info" @click="voltar">Voltar</button>
       </div>
     </div>
   </div>
 </template>
 <script>
- import Erro from "../../services/erros";
+import Erro from "../../services/erros";
 export default {
   data() {
     return {
@@ -69,6 +68,11 @@ export default {
       this.$router.push({
         name: "login"
       });
+    },
+    voltar() {
+      this.$router.push({
+        name: "home"
+      });
     }
   },
   mounted() {
@@ -79,9 +83,9 @@ export default {
     console.log(this.idErro);
 
     Erro.listarErro(this.idErro).then(resErro => {
-              let errors = resErro.data
-              //this.erros = errors
-          })
+      let errors = resErro.data;
+      //this.erros = errors
+    });
   }
 };
 </script>
@@ -96,8 +100,5 @@ export default {
 }
 .direita {
   float: right;
-}
-.corLogout {
-  color: blue;
 }
 </style>
