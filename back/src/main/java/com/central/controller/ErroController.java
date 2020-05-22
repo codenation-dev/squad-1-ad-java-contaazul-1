@@ -35,35 +35,35 @@ public class ErroController {
 	private ErroService erroService;
 	
 
-	@GetMapping("/erro/get")
+	@GetMapping("/erro")
 	public List<Erro> getAllErros() {
 		return erroService.getAllErros();
 	}
 	
-	@GetMapping("/erro/get/{id}")
+	@GetMapping("/erro{id}")
 	public Optional<Erro> getErro(@PathVariable Long id) {
 		return erroService.findById(id);
 	}
 	
-	@RequestMapping(path = "/erro/get/eventos/{titulo}", method = RequestMethod.GET)
+	@RequestMapping(path = "/erro/eventos/{titulo}", method = RequestMethod.GET)
 	public Integer eventosErro(@PathVariable String titulo) {
 		return erroService.frequenciaErros(titulo);
 	}
 	
-	@PostMapping("/erro/post")
+	@PostMapping("/erro")
 	public Erro registraErro(@Valid @RequestBody Erro erro) {	
 		System.out.println("Novo erro: " + erro.getTitulo()); 
 		return erroService.save(erro);
 
 	}
 	
-	@PutMapping("/erro/put/{id}")
+	@PutMapping("/erro/{id}")
     public ResponseEntity<Erro> atualizaErro(@PathVariable(value = "id") Long erroId,
          @Valid @RequestBody Erro novoErro) throws ResourceNotFoundException{
 		return erroService.atualizaErro(erroId, novoErro);
     }
 
-    @DeleteMapping("/erro/delete/{id}")
+    @DeleteMapping("/erro/{id}")
     public Map<String, Boolean> deletaErro(@PathVariable(value = "id") Long erroId)
          throws ResourceNotFoundException {
         return erroService.removeErro(erroId);
