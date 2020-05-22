@@ -1,49 +1,87 @@
 <template>
   <div>
-    <div>
-      <h1>Bem vindo {{usuario.nome}}. Seu token é {{usuario.token}}</h1>
-      <button @click="logout">Sair</button>
-    </div>
-    <div>
-      <button>Voltar</button>
-    </div>
-    <div class="erro">
-      <label>Erro no 127.0.0.1 em 13/04/2020 10:15</label>
-    </div>
-    <div>
-      <div class="margin">
+    <div class="justify-content-between row col-md-12">
+      <div>
         <div>
-          <label>Título</label>
+          <label class="mr-4">Bem vindo(a) {{usuario.nome}}.</label>
+          <button @click="logout" class="botaoLogout">
+            <i class="gg-log-out corLogout"></i>
+          </button>
         </div>
-        <label>dasdadasdasdadasdadasdasda</label>
-      </div>
-      <div class="direita">
-        <label>Erro</label>
-        <label>Eventos</label>
-        <label>1000</label>
+        <label>
+          Seu token é
+          <small>{{usuario.token}}</small>
+        </label>
       </div>
     </div>
-    <div>
-      <div class="margin">
-        <div>
-          <label>Detalhes</label>
-        </div>
-        <label>dasdadasdasdadasdadasdasda</label>
+    <div class="jumbotron">
+      <div class="erro">
+        <label>{{erros.dataErro}}</label>
       </div>
-      <div class="direita">
-        <label>Coletado por</label>
-        <label>Aqui passa token</label>
+      <div>
+        <div class="margin">
+          <div>
+            <label>Título:</label>
+          </div>
+          <label>{{erros.titulo}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Origem erro:</label>
+          </div>
+          <label>{{erros.origem}}</label>
+        </div>
+      </div>
+      <div>
+        <div class="margin">
+          <div>
+            <label>Ambiente:</label>
+          </div>
+          <label>{{erros.ambiente}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Arquivado:</label>
+          </div>
+          <label>{{erros.arquivado}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Detalhes:</label>
+          </div>
+          <label>{{erros.detalhes}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Coletado por:</label>
+          </div>
+          <label>{{usuario.token}}</label>
+        </div>
+      </div>
+      <div>
+        <button class="btn btn-info" @click="voltar">Voltar</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import Erro from "../../services/erros";
 export default {
   data() {
     return {
+      idErro: null,
+      erro: {},
       usuario: {
-        nome: "Larissa",
-        token: "4d5748sdasd"
+        nome: null,
+        token: null
+      },
+      erros: {
+        ambiente: null,
+        detalhes: null,
+        titulo: null,
+        dataErro: null,
+        origem: null,
+        arquivado: null
       }
     };
   },
@@ -52,7 +90,29 @@ export default {
       this.$router.push({
         name: "login"
       });
+    },
+    voltar() {
+      this.$router.push({
+        name: "home"
+      });
     }
+  },
+  mounted() {
+    this.idErro = this.$route.params.id;
+    this.usuario.nome = this.$route.params.usuario;
+    this.usuario.token = this.$route.params.token;
+
+    Erro.detalhesErro(this.idErro).then(resposta => {
+      console.log("resposta ");
+      console.log(resposta);
+
+      this.erros.ambiente = resposta.data.ambiente;
+      this.erros.detalhes = resposta.data.detalhes;
+      this.erros.titulo = resposta.data.titulo;
+      this.erros.dataErro = resposta.data.updatedAt;
+      this.erros.origem = resposta.data.origem;
+      this.erros.arquivado = resposta.data.arquivado;
+    });
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="justify-content-between row">
+    <div class="justify-content-between row col-md-12">
       <div>
         <label>Bem vindo(a) {{usuario.nome}}.</label>
         <label>
@@ -8,8 +8,8 @@
           <small>{{usuario.token}}</small>
         </label>
       </div>
-      <button @click="logout">
-        <i class="fas fa-sign-out-alt"></i>
+      <button @click="logout" class="botaoLogout">
+        <i class="gg-log-out corLogout"></i>
       </button>
     </div>
     <div class="justify-content-around mt-4 row">
@@ -33,8 +33,8 @@
       />
     </div>
     <div>
-      <button class="btn btn-success">Arquivar</button>
-      <button class="btn btn-danger">Apagar</button>
+      <button @click="Arquivar" class="btn btn-success">Arquivar</button>
+      <button @click="Deletar" class="btn btn-danger">Apagar</button>
     </div>
     <div>
       <table>
@@ -44,6 +44,7 @@
             <th>Nivel</th>
             <th>Log</th>
             <th>Eventos</th>
+            <th>Detalhe Erro</th>
           </tr>
         </thead>
         <tbody>
@@ -53,10 +54,9 @@
             v-if="erro.ambiente == ambienteSelecionado || filtrarTodosAmbientes"
           >
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" :value="erro.id" v-model="checkedErro" />
             </td>
             <td>{{erro.nivel}}</td>
-
             <td>
               {{erro.titulo}}
               <br />
@@ -64,8 +64,12 @@
               <br />
               {{erro.origem}}
             </td>
-
             <td>{{erro.eventos}}</td>
+            <td>
+              <router-link
+                :to="{ name: 'detalhe', params: { id: erro.id, usuario: usuario.nome, token: usuario.token  }}"
+              >Erro</router-link>
+            </td>
           </tr>
           <tr></tr>
         </tbody>
@@ -81,6 +85,7 @@ import Usuario from "../../services/usuarios";
 export default {
   data() {
     return {
+      checkedErro: [],
       usuario: {
         nome: "",
         token: ""
@@ -112,10 +117,34 @@ export default {
       this.$router.push({
         name: "login"
       });
+    },
+    detalheErro() {
+      this.$router.push({
+        name: "login"
+      });
+    },
+    Arquivar() {
+      console.log("Erros assinalados:" + this.checkedErro);
+      Erro.arquivarErro(this.checkedErro).then(resposta => {
+        if (resposta) {
+          console.log("Arquivado com sucesso");
+        } else {
+          console.log("Erro ao arquivar");
+        }
+      });
+    },
+    Deletar() {
+      console.log("Erros assinalados para deletar:" + this.checkedErro);
+      Erro.deletarErro(this.checkedErro).then(resposta => {
+        if (resposta) {
+          console.log("Deletado com sucesso");
+        } else {
+          console.log("Erro ao deletar");
+        }
+      });
     }
   },
   mounted() {
-
     this.usuario.nome = this.$route.params.nome;
     this.usuario.token = this.$route.params.token;
 
@@ -135,8 +164,6 @@ export default {
         this.erros = errors;
       });
     });
-
-
   },
 
   computed: {
@@ -212,6 +239,9 @@ button {
   text-align: center;
   color: white;
   margin-top: 10px;
+}
+.corLogout {
+  color: blue;
 }
 select {
   font-size: 15px;

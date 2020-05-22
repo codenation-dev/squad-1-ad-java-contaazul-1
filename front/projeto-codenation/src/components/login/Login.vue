@@ -96,9 +96,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.erro {
-  color: red;
-}
-</style>

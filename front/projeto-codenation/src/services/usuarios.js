@@ -2,7 +2,7 @@ import { http } from './config'
 
 export default {
 	listar: () => {
-		return http.get('usuario/get')
+		return http.get('usuario/')
 	},
 
 
@@ -25,5 +25,14 @@ export default {
 				password: usuario.senha
 			}
 		)
+	},
+	alterarSenha: (usuario) => {
+		return http.get('usuario/alterarsenha/' + usuario.email + '/' + usuario.senhaAntiga + '/' + usuario.senhaNova1 + '/' + usuario.senhaNova2,
+			{
+				email: usuario.email,
+				senhaAntiga: usuario.senhaAntiga,
+				senhaNova1: usuario.senhaNova1,
+				senhaNova2: usuario.senhaNova2
+			})
 	}
 }

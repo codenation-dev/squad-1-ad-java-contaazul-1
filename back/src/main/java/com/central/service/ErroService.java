@@ -91,6 +91,37 @@ public class ErroService implements ErroServiceInterface{
         
         return response;
 	}
+	
+    public Boolean arquivarErro(List<Long> errosId) throws ResourceNotFoundException{
+		Boolean stErroArquivado = false;
+		for(Long erroId : errosId) {
+			System.out.println("ARQUIVAR ERRO: " + erroId); 
+			Erro erro = repository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
+			erro.setArquivado(true);
+			if (erro.isArquivado()) {
+				System.out.println("ERRO ARQUIVADO: " + erro.getTitulo());
+				stErroArquivado = true;
+				repository.save(erro);
+			}
+		}
+		return stErroArquivado;
+    }
+    
+    public Boolean deletaErros(List<Long> listaErros)throws ResourceNotFoundException {
+       	
+   		Boolean stErroDeletado = false;
+   		for(Long erroId : listaErros) {
+   			
+   			Erro erro = repository.findById(erroId).orElseThrow(() -> new ResourceNotFoundException("Erro não encontrado para o id " + erroId));
+   			
+   			System.out.println("ERRO DELETAR: " + erroId);
+   			
+   			repository.delete(erro);
+   			stErroDeletado = true;
+   			System.out.println("ERRO DELETADO: " + erroId);
+   		}
+   		return stErroDeletado;
+       }
 
 
 }

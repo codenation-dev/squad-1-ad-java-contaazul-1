@@ -38,11 +38,7 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 
     @Query(value = "select u.email from usuario u where u.email = :email", nativeQuery = true)
 	String findEmail(String email);
-
-    @Modifying 
-    @Query(value = "update usuario set password = :senhaNova1 where email = :email", nativeQuery = true)
-	void alterarSenha(String email, String senhaNova1);
     
-     
+    Optional<Usuario> findByEmail(String email);  
     
 }

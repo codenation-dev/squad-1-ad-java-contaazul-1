@@ -9,5 +9,5 @@ export const routes = [
     { path: '/cadastro', component: Cadastro, titulo: 'Cadastro' },
     { path: '/alterar-senha', component: AlterarSenha, titulo: 'Alterar Senha' },
     { path: '/home', component: Home, titulo: 'Home', name: 'home' },
-    { path: '/detalhe-erro', component: DetalheErro, titulo: 'Detalhe erro' }
+    { path: '/detalhe-erro', component: DetalheErro, titulo: 'Detalhe erro', name: 'detalhe' }
 ]
