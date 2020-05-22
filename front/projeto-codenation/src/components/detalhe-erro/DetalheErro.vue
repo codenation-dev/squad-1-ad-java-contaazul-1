@@ -16,31 +16,46 @@
     </div>
     <div class="jumbotron">
       <div class="erro">
-        <label>Erro no 127.0.0.1 em 13/04/2020 10:15</label>
+        <label>{{erros.dataErro}}</label>
       </div>
       <div>
         <div class="margin">
           <div>
-            <label>Título</label>
+            <label>Título:</label>
           </div>
-          <label>dasdadasdasdadasdadasdasda</label>
+          <label>{{erros.titulo}}</label>
         </div>
-        <div class="direita">
-          <label>Erro</label>
-          <label>Eventos</label>
-          <label>1000</label>
+        <div class="margin">
+          <div>
+            <label>Origem erro:</label>
+          </div>
+          <label>{{erros.origem}}</label>
         </div>
       </div>
       <div>
         <div class="margin">
           <div>
-            <label>Detalhes</label>
+            <label>Ambiente:</label>
           </div>
-          <label>dasdadasdasdadasdadasdasda</label>
+          <label>{{erros.ambiente}}</label>
         </div>
-        <div class="direita">
-          <label>Coletado por</label>
-          <label>Aqui passa token</label>
+        <div class="margin">
+          <div>
+            <label>Arquivado:</label>
+          </div>
+          <label>{{erros.arquivado}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Detalhes:</label>
+          </div>
+          <label>{{erros.detalhes}}</label>
+        </div>
+        <div class="margin">
+          <div>
+            <label>Coletado por:</label>
+          </div>
+          <label>{{usuario.token}}</label>
         </div>
       </div>
       <div>
@@ -57,10 +72,17 @@ export default {
       idErro: null,
       erro: {},
       usuario: {
-        nome: "Atari",
-        token: "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJBdGFyaSIsImlhdCI6MTU4OTk0MDEwMg"
+        nome: null,
+        token: null
       },
-      erros: null
+      erros: {
+        ambiente: null,
+        detalhes: null,
+        titulo: null,
+        dataErro: null,
+        origem: null,
+        arquivado: null
+      }
     };
   },
   methods: {
@@ -77,14 +99,19 @@ export default {
   },
   mounted() {
     this.idErro = this.$route.params.id;
-    //this.usuario.nome = this.$route.params.usuario;
-    //this.usuario.token = this.$route.params.token;
+    this.usuario.nome = this.$route.params.usuario;
+    this.usuario.token = this.$route.params.token;
 
-    console.log(this.idErro);
+    Erro.detalhesErro(this.idErro).then(resposta => {
+      console.log("resposta ");
+      console.log(resposta);
 
-    Erro.listarErro(this.idErro).then(resErro => {
-      let errors = resErro.data;
-      //this.erros = errors
+      this.erros.ambiente = resposta.data.ambiente;
+      this.erros.detalhes = resposta.data.detalhes;
+      this.erros.titulo = resposta.data.titulo;
+      this.erros.dataErro = resposta.data.updatedAt;
+      this.erros.origem = resposta.data.origem;
+      this.erros.arquivado = resposta.data.arquivado;
     });
   }
 };

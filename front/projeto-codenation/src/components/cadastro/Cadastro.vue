@@ -107,18 +107,22 @@ export default {
         alert("Informe um email valido");
         return;
       }
-
       this.$validator.validateAll().then(success => {
         if (success) {
           Usuario.salvar(this.usuario).then(resposta => {
             console.log("Salvo com sucesso");
-              this.$router.push({
-                name: "login"
-              });
+            this.$router.push({
+              name: "login"
+            });
           });
         } else {
           console.log("Não foi possivel salvar usuario");
         }
+      });
+    },
+    login() {
+      this.$router.push({
+        name: "login"
       });
     },
     validEmail(email) {
