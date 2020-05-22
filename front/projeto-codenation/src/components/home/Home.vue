@@ -34,8 +34,8 @@
       />
     </div>
     <div>
-      <button class="btn btn-success">Arquivar</button>
-      <button class="btn btn-danger">Apagar</button>
+      <button @click="Arquivar" class="arquivar">Arquivar</button>
+      <button @click="Deletar" class="deletar">Apagar</button>
     </div>
     <div>
       <table>
@@ -55,7 +55,7 @@
             v-if="erro.ambiente == ambienteSelecionado || filtrarTodosAmbientes"
           >
             <td>
-              <input type="checkbox" />
+              <input type="checkbox" :value="erro.id" v-model="checkedErro"/>
             </td>
             <td>{{erro.nivel}}</td>
 
@@ -88,6 +88,7 @@ import Usuario from "../../services/usuarios";
 export default {
   data() {
     return {
+    checkedErro:[],
       usuario: {
         nome: "",
         token: ""
@@ -124,6 +125,28 @@ export default {
       this.$router.push({
         name: "login"
       });
+    },
+    Arquivar(){
+      console.log("Erros assinalados:"+ this.checkedErro);
+      Erro.arquivarErro(this.checkedErro).then(resposta => {
+        if (resposta) {
+          console.log("Arquivado com sucesso");
+        }
+        else {
+          console.log("Erro ao arquivar");
+        }
+      });  
+    },
+    Deletar(){
+      console.log("Erros assinalados para deletar:"+ this.checkedErro);
+      Erro.deletarErro(this.checkedErro).then(resposta => {
+        if (resposta) {
+          console.log("Deletado com sucesso");
+        }
+        else {
+          console.log("Erro ao deletar");
+        }
+      }); 
     }
   },
   mounted() {

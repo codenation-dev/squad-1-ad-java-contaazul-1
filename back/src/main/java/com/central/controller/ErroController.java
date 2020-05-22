@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,7 @@ import com.central.repository.ErroRepository;
 import com.central.service.ErroService;
 
 
-//@CrossOrigin(origins = "http://localhost:8080")
+@CrossOrigin(origins = "*")
 @RestController
 public class ErroController {
 	
@@ -66,6 +67,39 @@ public class ErroController {
     public Map<String, Boolean> deletaErro(@PathVariable(value = "id") Long erroId)
          throws ResourceNotFoundException {
         return erroService.removeErro(erroId);
+    }
+    
+	@PutMapping("/erro/arquivarErro/{listaErro}")
+    public Boolean arquivarErro(@PathVariable(value = "listaErro") List<Long> errosId
+        ) throws ResourceNotFoundException{
+		Boolean stErroArquivado = false;
+		for(Long erroId : errosId) {
+			//System.out.println("ARQUIVAR ERRO: " + erroId); 
+			Optional<Erro> erro = erroService.findById(erroId);
+			erro.get().setArquivado(true);
+			if (erro.get().isArquivado()) {
+				//System.out.println("ERRO ARQUIVADO: " + erro.get().getTitulo());
+				stErroArquivado = true;
+				erroService.save(erro.get());
+			}
+		}
+		return stErroArquivado;
+    }
+	
+    @DeleteMapping("/erro/deleteErros/{listaErros}")
+    public Boolean deletaErros(@PathVariable(value = "listaErros") List<Long> listaErros)
+         throws ResourceNotFoundException {
+    	
+		Boolean stErroDeletado = false;
+		for(Long erroId : listaErros) {
+				//System.out.println("ERRO DELETAR: " + erroId);
+				erroService.removeErro(erroId);
+			if (!erroService.findById(erroId).isPresent()) {
+				stErroDeletado = true;
+				//System.out.println("ERRO DELETADO: " + erroId);
+			}
+		}
+		return stErroDeletado;
     }
 }
 

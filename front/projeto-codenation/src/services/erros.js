@@ -19,6 +19,14 @@ export default {
 
 	listarErro:(idErro)=>{
 		return http.get('erro/get/' + idErro)
+	},
+
+	arquivarErro:(errosId)=>{
+		return http.put('erro/arquivarErro/' + errosId)
+	},
+
+	deletarErro:(errosId)=>{
+		return http.delete('erro/deleteErros/' + errosId)
 	}
 
 }
