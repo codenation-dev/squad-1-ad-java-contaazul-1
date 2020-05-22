@@ -54,10 +54,13 @@ public class UsuarioService implements UsuarioServiceInterface{
 		if(!senhaNova1.equals(senhaNova2)) return "Senhas incompatíveis";
 		if (!encoder.matches(senhaAntiga, repository.findSenha(email))) return "Senha antiga incorreta";
 		String senhaNovaCrip = encoder.encode(senhaNova1);
-		repository.alterarSenha(email, senhaNovaCrip);
+		
+		Usuario usuario = repository.findByEmail(email).get();
+		usuario.setPassword(senhaNovaCrip);
+		repository.save(usuario);
+		
 		return "Senha atualizada" + senhaNovaCrip;
 		
 	}
-	
 
 }

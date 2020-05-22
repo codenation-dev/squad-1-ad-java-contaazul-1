@@ -70,36 +70,17 @@ public class ErroController {
     }
     
 	@PutMapping("/erro/arquivarErro/{listaErro}")
-    public Boolean arquivarErro(@PathVariable(value = "listaErro") List<Long> errosId
+    public Boolean arquivarErro(@PathVariable(value = "listaErro") List<Long> listaErros
         ) throws ResourceNotFoundException{
-		Boolean stErroArquivado = false;
-		for(Long erroId : errosId) {
-			//System.out.println("ARQUIVAR ERRO: " + erroId); 
-			Optional<Erro> erro = erroService.findById(erroId);
-			erro.get().setArquivado(true);
-			if (erro.get().isArquivado()) {
-				//System.out.println("ERRO ARQUIVADO: " + erro.get().getTitulo());
-				stErroArquivado = true;
-				erroService.save(erro.get());
-			}
-		}
-		return stErroArquivado;
+		
+		return erroService.arquivarErro(listaErros);
     }
 	
     @DeleteMapping("/erro/deleteErros/{listaErros}")
     public Boolean deletaErros(@PathVariable(value = "listaErros") List<Long> listaErros)
          throws ResourceNotFoundException {
-    	
-		Boolean stErroDeletado = false;
-		for(Long erroId : listaErros) {
-				//System.out.println("ERRO DELETAR: " + erroId);
-				erroService.removeErro(erroId);
-			if (!erroService.findById(erroId).isPresent()) {
-				stErroDeletado = true;
-				//System.out.println("ERRO DELETADO: " + erroId);
-			}
-		}
-		return stErroDeletado;
+		
+    	return erroService.deletaErros(listaErros);
     }
 }
 

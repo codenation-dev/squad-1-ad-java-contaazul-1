@@ -52,8 +52,12 @@ public class UsuarioController {
 	@RequestMapping(path = "usuario/alterarsenha/{email}/{senhaAntiga}/{senhaNova1}/{senhaNova2}", method = RequestMethod.GET)
 	public String alterarSenha(@PathVariable String email, @PathVariable String senhaAntiga, 
 			@PathVariable String senhaNova1, @PathVariable String senhaNova2) {
-		System.out.println("oiiiii");
-		return usuarioService.alterarSenha(email, senhaAntiga, senhaNova1, senhaNova2);
+		
+		String retorno = usuarioService.alterarSenha(email, senhaAntiga, senhaNova1, senhaNova2);
+		
+		System.out.println("ALTERAR SENHA RETORNO: "+retorno);
+		
+		return retorno;
 	}
 	
 	@PostMapping("/usuario/post")

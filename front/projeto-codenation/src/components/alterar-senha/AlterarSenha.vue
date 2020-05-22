@@ -105,12 +105,7 @@ export default {
     alterarSenha() {
       this.$validator.validateAll().then(success => {
         if (success) {
-          Usuario.alterarSenha(
-            this.usuario.email,
-            this.usuario.senhaAntiga,
-            this.usuario.senhaNova1,
-            this.usuario.senhaNova2
-          ).then(resposta => {
+          Usuario.alterarSenha(this.usuario).then(resposta => {
             if (resposta) {
               console.log(resposta);
             }
