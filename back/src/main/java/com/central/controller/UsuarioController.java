@@ -34,17 +34,12 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 	
-	@GetMapping("/usuario/get")
+	@GetMapping("/usuario")
 	public List<Usuario> getAllUsuarios() {
 		return usuarioRepository.findAll();
 	}
 	
-	@RequestMapping(path = "/login/get/{name}/{password}", method = RequestMethod.GET)
-	public Usuario login(@PathVariable String name, @PathVariable String password) {
-		return usuarioRepository.findByLogin(name, password);
-	}
-	
-	@RequestMapping(path = "usuario/get/{name}", method = RequestMethod.GET)
+	@RequestMapping(path = "usuario/{name}", method = RequestMethod.GET)
 	public List<Usuario> findName(@PathVariable String name) {
 		return usuarioRepository.findByName(name);
 	}
@@ -60,14 +55,14 @@ public class UsuarioController {
 		return retorno;
 	}
 	
-	@PostMapping("/usuario/post")
+	@PostMapping("/usuario")
 	public Usuario registraUsuario(@Valid @RequestBody Usuario usuario) {	
 		System.out.println("Novo usuario: " + usuario.getName()); 
 		return usuarioRepository.save(usuario);
 
 	}
 	
-	@PutMapping("/usuario/put/{id}")
+	@PutMapping("/usuario/{id}")
     public ResponseEntity<Usuario> atualizaUsuario(@PathVariable(value = "id") Long usuarioId,
          @Valid @RequestBody Usuario usuarioDetalhes) throws ResourceNotFoundException {
 		Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado para o id " + usuarioId));
@@ -78,7 +73,7 @@ public class UsuarioController {
         return ResponseEntity.ok(usuarioAtualizado);
     }
 
-    @DeleteMapping("/usuario/delete/{id}")
+    @DeleteMapping("/usuario/{id}")
     public Map<String, Boolean> deletaUsuario(@PathVariable(value = "id") Long usuarioId)
          throws ResourceNotFoundException {
     	Usuario usuario = usuarioRepository.findById(usuarioId).orElseThrow(() -> new ResourceNotFoundException("Usuario não encontrado para o id " + usuarioId));
