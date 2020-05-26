@@ -16,7 +16,7 @@
     </div>
     <div class="jumbotron">
       <div class="erro">
-        <label>{{erros.dataErro}}</label>
+        <label>Data erro: {{erros.dataErro}}</label>
       </div>
       <div>
         <div class="margin">
@@ -101,6 +101,21 @@ export default {
           }
         }
       });
+    },
+    obterDataFormatadaPT(data) {
+      var pular = data.split("-");
+      var dia = pular[2].substring(0, 2);
+      var mes = pular[1];
+      var ano = pular[0];
+      var dataFormatada = new Date(ano, mes - 1, dia).toLocaleDateString(
+        "pt-BR",
+        {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
+        }
+      );
+      return dataFormatada;
     }
   },
   mounted() {
@@ -111,7 +126,7 @@ export default {
       this.erros.ambiente = resposta.data.ambiente;
       this.erros.detalhes = resposta.data.detalhes;
       this.erros.titulo = resposta.data.titulo;
-      this.erros.dataErro = resposta.data.updatedAt;
+      this.erros.dataErro = this.obterDataFormatadaPT(resposta.data.updatedAt);
       this.erros.origem = resposta.data.origem;
       this.erros.arquivado = resposta.data.arquivado;
     });
