@@ -5,6 +5,14 @@
         <div
           style="margin-bottom: 15px; background: #f7f7f7; box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); padding: 30px;"
         >
+          <div>
+            <img
+              src="src\components\imagens\logo-central.png "
+              style="margin: 0 0 30px; "
+              width="275"
+              height="80"
+            />
+          </div>
           <h2 class="text-center" style="margin: 0 0 15px;">{{ titulo }}</h2>
           <form @submit.prevent="salvar">
             <div class="form-group">
