@@ -67,7 +67,12 @@
             <td>{{erro.eventos}}</td>
             <td>
               <router-link
-                :to="{ name: 'detalhe', params: { id: erro.id, usuario: usuario.nome, token: usuario.token  }}"
+                :to="{ name: 'detalhe', 
+                params: { id: erro.id, 
+                usuario:{
+                  nome: usuario.nome,
+                  token: usuario.token
+                }}}"
               >Erro</router-link>
             </td>
           </tr>
@@ -145,8 +150,8 @@ export default {
     }
   },
   mounted() {
-    this.usuario.nome = this.$route.params.nome;
-    this.usuario.token = this.$route.params.token;
+    this.usuario.nome = this.$route.params.usuario.nome;
+    this.usuario.token = this.$route.params.usuario.token;
 
     Erro.listar(this.usuario.token).then(resErro => {
       let errors = resErro.data;

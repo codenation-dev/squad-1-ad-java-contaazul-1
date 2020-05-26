@@ -6,7 +6,10 @@ export default {
 	},
 
 
-	login: (username, senha) => {
+	login: (username, senha, token) => {
+		headers: {
+			Authorization: 'Bearer ' + token
+		}
 		return http.post('api/auth/signin',
 			{
 				username: username,

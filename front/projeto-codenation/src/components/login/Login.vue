@@ -79,8 +79,10 @@ export default {
                 this.$router.push({
                   name: "home",
                   params: {
-                    nome: this.nome,
-                    token: resposta.data.accessToken
+                    usuario: {
+                      nome: this.nome,
+                      token: resposta.data.accessToken
+                    }
                   }
                 });
               } else {

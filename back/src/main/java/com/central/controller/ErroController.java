@@ -40,7 +40,7 @@ public class ErroController {
 		return erroService.getAllErros();
 	}
 	
-	@GetMapping("/erro{id}")
+	@GetMapping("/erro/{id}")
 	public Optional<Erro> getErro(@PathVariable Long id) {
 		return erroService.findById(id);
 	}

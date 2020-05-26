@@ -21,8 +21,13 @@ export default {
 	deletarErro: (errosId) => {
 		return http.delete('erro/deleteErros' + errosId)
 	},
-	detalhesErro: (idErro) => {
-		return http.get('erro/' + idErro)
+	detalhesErro: (idErro, token) => {
+
+		return http.get('erro/' + idErro, {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
 	}
 
 }

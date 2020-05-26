@@ -93,19 +93,21 @@ export default {
     },
     voltar() {
       this.$router.push({
-        name: "home"
+        name: "home",
+        params: {
+          usuario: {
+            nome: this.$route.params.usuario.nome,
+            token: this.$route.params.usuario.token
+          }
+        }
       });
     }
   },
   mounted() {
     this.idErro = this.$route.params.id;
-    this.usuario.nome = this.$route.params.usuario;
-    this.usuario.token = this.$route.params.token;
+    this.usuario = this.$route.params.usuario;
 
-    Erro.detalhesErro(this.idErro).then(resposta => {
-      console.log("resposta ");
-      console.log(resposta);
-
+    Erro.detalhesErro(this.idErro, this.usuario.token).then(resposta => {
       this.erros.ambiente = resposta.data.ambiente;
       this.erros.detalhes = resposta.data.detalhes;
       this.erros.titulo = resposta.data.titulo;
