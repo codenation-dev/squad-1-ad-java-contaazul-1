@@ -1,22 +1,28 @@
 <template>
   <div>
-    <div class="justify-content-between row col-md-12">
-      <div>
-        <div>
-          <label class="mr-4">Bem vindo(a) {{usuario.nome}}.</label>
-          <button @click="logout" class="botaoLogout">
-            <i class="gg-log-out corLogout"></i>
-          </button>
-        </div>
-        <label>
-          Seu token é
-          <small>{{usuario.token}}</small>
-        </label>
+    <div style="height: 140px" class="text-center">
+      <img class="logo" src="src\components\imagens\logo-central.png " style="margin: 0 0 15px; " />
+    </div>
+    <div class="justify-content-between justify-content-lg-between row col-md-12 p-0 m-0">
+      <div style="width: 90%">
+        <label style="font-weight: 700">Bem vindo(a)</label>
+        <label style="font-weight: 400; font-style: italic">{{usuario.nome}}.</label>
+        <p>
+          <label style="font-weight: 700">
+            Seu token é
+            <small>{{usuario.token}}</small>
+          </label>
+        </p>
+      </div>
+      <div class="align-content-around row pr-3">
+        <button @click="logout" class="botaoLogout">
+          <i class="gg-log-out corLogout"></i>
+        </button>
       </div>
     </div>
-    <div class="jumbotron">
+    <div class="jumbotron pt-2">
       <div class="erro">
-        <label>Data erro: {{erros.dataErro}}</label>
+        <label>Data do erro: {{erros.dataErro}}</label>
       </div>
       <div>
         <div class="margin">
@@ -128,7 +134,7 @@ export default {
       this.erros.titulo = resposta.data.titulo;
       this.erros.dataErro = this.obterDataFormatadaPT(resposta.data.updatedAt);
       this.erros.origem = resposta.data.origem;
-      this.erros.arquivado = resposta.data.arquivado;
+      this.erros.arquivado = resposta.data.arquivado ? "Sim" : "Não";
     });
   }
 };

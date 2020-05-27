@@ -7,6 +7,7 @@
         >
           <div>
             <img
+              class="logoLogin"
               src="src\components\imagens\logo-central.png "
               style="margin: 0 0 30px; "
               width="275"

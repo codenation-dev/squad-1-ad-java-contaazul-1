@@ -7,6 +7,7 @@
         >
           <div>
             <img
+              class="logoLogin"
               src="src\components\imagens\logo-central.png "
               style="margin: 0 0 30px; "
               width="275"
@@ -147,16 +148,5 @@ export default {
 <style>
 .erro {
   color: red;
-}
-#pass {
-  width: 150px;
-  padding-right: 20px;
-}
-
-.olho {
-  cursor: pointer;
-  left: 160px;
-  position: absolute;
-  width: 20px;
 }
 </style>

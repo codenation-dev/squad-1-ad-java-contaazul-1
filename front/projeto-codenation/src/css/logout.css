@@ -39,9 +39,10 @@
   bottom: 5px;
 }
 .botaoLogout {
-  height: 60;
-  width: 50;
+  height: 40px;
+  width: 40px;
   border-radius: 10%;
   border: 2px solid blue;
   background-color: cornflowerblue;
+  text-align: -webkit-center;
 }

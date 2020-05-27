@@ -8,6 +8,7 @@
           <div style="width: 340px; margin: 20px auto;">
             <div>
               <img
+                class="logoLogin"
                 src="src\components\imagens\logo-central.png "
                 style="margin: 0 0 15px; "
                 width="275"

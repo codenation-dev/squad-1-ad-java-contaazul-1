@@ -1,16 +1,24 @@
 <template>
   <div>
-    <div class="justify-content-between row col-md-12">
-      <div>
-        <label>Bem vindo(a) {{usuario.nome}}.</label>
-        <label>
-          Seu token é
-          <small>{{usuario.token}}</small>
-        </label>
+    <div>
+      <div style="height: 140px" class="text-center">
+        <img class="logo" src="src\components\imagens\logo-central.png " style="margin: 0 0 15px; " />
       </div>
-      <button @click="logout" class="botaoLogout">
-        <i class="gg-log-out corLogout"></i>
-      </button>
+      <div class="justify-content-between justify-content-lg-between row col-md-12 p-0 m-0">
+        <div style="width: 90%">
+          <label style="font-weight: 700">Bem vindo(a)</label>
+          <label style="font-style: italic">{{usuario.nome}}.</label>
+          <label style="font-weight: 700">
+            Seu token é
+            <small>{{usuario.token}}</small>
+          </label>
+        </div>
+        <div class="align-content-around row pr-3">
+          <button @click="logout" class="botaoLogout">
+            <i class="gg-log-out corLogout"></i>
+          </button>
+        </div>
+      </div>
     </div>
     <div class="justify-content-around mt-4 row">
       <select v-model="ambienteSelecionado" class="col-2">
