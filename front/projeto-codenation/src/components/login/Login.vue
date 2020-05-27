@@ -97,7 +97,7 @@ export default {
                   }
                 });
               } else {
-                alert("Usuário não registrado");
+                alert("teste");
               }
             } else {
               console.log("Não conseguiu conexão com servidor");

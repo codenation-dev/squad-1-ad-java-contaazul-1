@@ -138,7 +138,7 @@ export default {
     },
     Arquivar() {
       console.log("Erros assinalados:" + this.checkedErro);
-      Erro.arquivarErro(this.checkedErro).then(resposta => {
+      Erro.arquivarErro(this.checkedErro, this.usuario.token).then(resposta => {
         if (resposta) {
           console.log("Arquivado com sucesso");
         } else {
@@ -148,7 +148,7 @@ export default {
     },
     Deletar() {
       console.log("Erros assinalados para deletar:" + this.checkedErro);
-      Erro.deletarErro(this.checkedErro).then(resposta => {
+      Erro.deletarErro(this.checkedErro, this.usuario.token).then(resposta => {
         if (resposta) {
           console.log("Deletado com sucesso");
         } else {

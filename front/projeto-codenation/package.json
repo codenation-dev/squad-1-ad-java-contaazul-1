@@ -16,6 +16,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.9",
     "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
+    "sweetalert": "^2.1.2",
     "vee-validate": "^2.0.0-beta.18",
     "vue": "^2.5.11",
     "vue-resource": "^1.0.3",

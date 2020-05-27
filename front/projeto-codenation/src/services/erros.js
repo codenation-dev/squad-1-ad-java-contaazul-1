@@ -15,11 +15,19 @@ export default {
 			}
 		})
 	},
-	arquivarErro: (errosId) => {
-		return http.put('erro/arquivarErro/' + errosId)
+	arquivarErro: (errosId, token) => {
+		return http.put('erro/arquivarErro/' + errosId, {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
 	},
-	deletarErro: (errosId) => {
-		return http.delete('erro/deleteErros' + errosId)
+	deletarErro: (errosId, token) => {
+		return http.delete('erro/deleteErros/' + errosId, {
+			headers: {
+				Authorization: 'Bearer ' + token
+			}
+		})
 	},
 	detalhesErro: (idErro, token) => {
 
