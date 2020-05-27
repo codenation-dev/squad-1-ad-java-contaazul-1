@@ -88,6 +88,9 @@
             </div>
           </form>
         </div>
+        <p class="text-center">
+          <router-link to="/">Já tenho conta</router-link>
+        </p>
       </div>
     </div>
   </div>
@@ -144,5 +147,16 @@ export default {
 <style>
 .erro {
   color: red;
+}
+#pass {
+  width: 150px;
+  padding-right: 20px;
+}
+
+.olho {
+  cursor: pointer;
+  left: 160px;
+  position: absolute;
+  width: 20px;
 }
 </style>

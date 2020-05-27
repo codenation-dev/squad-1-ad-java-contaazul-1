@@ -191,7 +191,15 @@ export default {
           return 0;
         });
       } else if (this.ordenacaoSelecionada == "frequencia") {
-        return this.erros;
+        return this.erros.sort(function(a, b) {
+          if (a.eventos > b.eventos) {
+            return 1;
+          }
+          if (a.eventos < b.eventos) {
+            return -1;
+          }
+          return 0;
+        });
       } else {
         return this.erros;
       }
