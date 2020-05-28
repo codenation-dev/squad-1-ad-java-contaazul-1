@@ -60,6 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/erro/arquivarErro/{listaErro}**").permitAll()
                 .antMatchers("/erro/deleteErros/{listaErros}**").permitAll()
+                .antMatchers("/usuario/alterarsenha/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
