@@ -140,9 +140,17 @@ export default {
       console.log("Erros assinalados:" + this.checkedErro);
       Erro.arquivarErro(this.checkedErro, this.usuario.token).then(resposta => {
         if (resposta) {
-          console.log("Arquivado com sucesso");
+          swal(
+            "Erro arquivado com sucesso!",
+            "Clique no botão para continuar.",
+            "success"
+          );
         } else {
-          console.log("Erro ao arquivar");
+          swal(
+            "Não foi possível arquivar erro!",
+            "Tente mais tarde.",
+            "success"
+          );
         }
       });
     },
@@ -150,9 +158,17 @@ export default {
       console.log("Erros assinalados para deletar:" + this.checkedErro);
       Erro.deletarErro(this.checkedErro, this.usuario.token).then(resposta => {
         if (resposta) {
-          console.log("Deletado com sucesso");
+          swal(
+            "Erro deletado com sucesso!",
+            "Clique no botão para continuar.",
+            "success"
+          );
         } else {
-          console.log("Erro ao deletar");
+          swal(
+            "Não foi possível deletar erro!",
+            "Tente mais tarde.",
+            "success"
+          );
         }
       });
     }

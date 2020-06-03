@@ -65,7 +65,7 @@
     </div>
   </div>
 </template>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 import Usuario from "../../services/usuarios";
 
@@ -84,9 +84,12 @@ export default {
         if (success) {
           Usuario.login(this.nome, this.senha).then(resposta => {
             if (resposta) {
-              console.log(resposta);
-
               if (resposta.data.accessToken != null) {
+                swal(
+                  "Logado com sucesso!",
+                  "Clique no botão para continuar.",
+                  "success"
+                );
                 this.$router.push({
                   name: "home",
                   params: {
@@ -100,7 +103,7 @@ export default {
                 alert("teste");
               }
             } else {
-              console.log("Não conseguiu conexão com servidor");
+              swal("Não foi possível logar!", "Tente mais tarde.", "warning");
             }
           });
         }
