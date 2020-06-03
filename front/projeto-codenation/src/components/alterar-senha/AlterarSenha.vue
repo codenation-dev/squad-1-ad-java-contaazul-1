@@ -116,10 +116,20 @@ export default {
         if (success) {
           Usuario.alterarSenha(this.usuario).then(resposta => {
             if (resposta) {
-              console.log(resposta);
+              swal(
+                "Senha alterada com sucesso!",
+                "Clique no botão para continuar.",
+                "success"
+              );
               this.$router.push({
                 name: "login"
               });
+            } else {
+              swal(
+                "Não foi possível alterar a senha!",
+                "Tente mais tarde.",
+                "warning"
+              );
             }
           });
         }

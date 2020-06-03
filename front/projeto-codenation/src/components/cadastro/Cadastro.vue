@@ -96,7 +96,7 @@
     </div>
   </div>
 </template>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 import Usuario from "../../services/usuarios";
 
@@ -122,13 +122,21 @@ export default {
       this.$validator.validateAll().then(success => {
         if (success) {
           Usuario.salvar(this.usuario).then(resposta => {
-            console.log("Salvo com sucesso");
+            swal(
+              "Usuário criado com sucesso!",
+              "Clique no botão para logar.",
+              "success"
+            );
             this.$router.push({
               name: "login"
             });
           });
         } else {
-          console.log("Não foi possivel salvar usuario");
+          swal(
+            "Não foi possível criar usúario!",
+            "Tente mais tarde.",
+            "warning"
+          );
         }
       });
     },
