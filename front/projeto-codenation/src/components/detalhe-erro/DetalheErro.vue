@@ -10,7 +10,7 @@
         <p>
           <label style="font-weight: 700">
             Seu token é
-            <small>{{usuario.token}}</small>
+            <label style="font-size: 11px">{{usuario.token}}</label>
           </label>
         </p>
       </div>

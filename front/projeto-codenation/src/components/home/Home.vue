@@ -10,7 +10,7 @@
           <label style="font-style: italic">{{usuario.nome}}.</label>
           <label style="font-weight: 700">
             Seu token é
-            <small>{{usuario.token}}</small>
+            <label style="font-size: 11px">{{usuario.token}}</label>
           </label>
         </div>
         <div class="align-content-around row pr-3">
@@ -43,6 +43,9 @@
     <div>
       <button @click="Arquivar" class="btn btn-success">Arquivar</button>
       <button @click="Deletar" class="btn btn-danger">Apagar</button>
+      <button @click="listaErros" class="btn btn-info">
+        <i class="gg-sync"></i>
+      </button>
     </div>
     <div>
       <table>
@@ -155,44 +158,58 @@ export default {
       });
     },
     Deletar() {
-      console.log("Erros assinalados para deletar:" + this.checkedErro);
-      Erro.deletarErro(this.checkedErro, this.usuario.token).then(resposta => {
-        if (resposta) {
-          swal(
-            "Erro deletado com sucesso!",
-            "Clique no botão para continuar.",
-            "success"
-          );
-        } else {
-          swal(
-            "Não foi possível deletar erro!",
-            "Tente mais tarde.",
-            "success"
+      swal({
+        title: "Deseja realmente excluir?",
+        text: "",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true
+      }).then(willDelete => {
+        if (willDelete) {
+          Erro.deletarErro(this.checkedErro, this.usuario.token).then(
+            resposta => {
+              if (resposta) {
+                this.listaErros();
+                swal(
+                  "Erro deletado com sucesso!",
+                  "Clique no botão para continuar.",
+                  "success"
+                );
+              } else {
+                swal(
+                  "Não foi possível deletar erro!",
+                  "Tente mais tarde.",
+                  "success"
+                );
+              }
+            }
           );
         }
+      });
+    },
+    listaErros() {
+      Erro.listar(this.usuario.token).then(resErro => {
+        let errors = resErro.data;
+        let promises = [];
+
+        errors.forEach(erro => {
+          promises.push(
+            Erro.eventos(erro.titulo, this.usuario.token).then(resposta => {
+              erro.eventos = resposta.data;
+            })
+          );
+        });
+
+        Promise.all(promises).then(() => {
+          this.erros = errors;
+        });
       });
     }
   },
   mounted() {
     this.usuario.nome = this.$route.params.usuario.nome;
     this.usuario.token = this.$route.params.usuario.token;
-
-    Erro.listar(this.usuario.token).then(resErro => {
-      let errors = resErro.data;
-      let promises = [];
-
-      errors.forEach(erro => {
-        promises.push(
-          Erro.eventos(erro.titulo, this.usuario.token).then(resposta => {
-            erro.eventos = resposta.data;
-          })
-        );
-      });
-
-      Promise.all(promises).then(() => {
-        this.erros = errors;
-      });
-    });
+    this.listaErros();
   },
 
   computed: {
@@ -276,9 +293,6 @@ button {
   text-align: center;
   color: white;
   margin-top: 10px;
-}
-.corLogout {
-  color: blue;
 }
 select {
   font-size: 15px;
