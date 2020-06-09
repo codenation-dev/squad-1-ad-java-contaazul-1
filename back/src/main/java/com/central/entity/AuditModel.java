@@ -10,20 +10,17 @@ import java.util.Date;
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-@JsonIgnoreProperties(
-        value = {"createdAt", "updatedAt"},
-        allowGetters = true
-)
+@JsonIgnoreProperties(value = { "createdAt", "updatedAt" }, allowGetters = true)
 public abstract class AuditModel implements Serializable {
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_criacao", nullable = false, updatable = false)
-    @CreatedDate
-    private Date createdAt;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_criacao", nullable = false, updatable = false)
+	@CreatedDate
+	private Date createdAt;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_alteracao", nullable = false)
-    @LastModifiedDate
-    private Date updatedAt;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_alteracao", nullable = false)
+	@LastModifiedDate
+	private Date updatedAt;
 
 	public Date getUpdatedAt() {
 		return updatedAt;
@@ -41,5 +38,4 @@ public abstract class AuditModel implements Serializable {
 		this.createdAt = createdAt;
 	}
 
-    
 }

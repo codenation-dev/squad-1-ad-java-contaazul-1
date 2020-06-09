@@ -1,7 +1,6 @@
 package com.central.service.interfaces;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import com.central.entity.Usuario;
 import com.central.service.interfaces.ServiceInterface;

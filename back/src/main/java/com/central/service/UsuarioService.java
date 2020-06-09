@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.central.entity.Erro;
-import com.central.entity.Usuario;
+import com.central.entity.*;
 import com.central.repository.UsuarioRepository;
 import com.central.service.interfaces.UsuarioServiceInterface;
 

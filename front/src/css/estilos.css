@@ -1,0 +1,12 @@
+.centralizado {
+  text-align: center;
+}
+.erro {
+  color: red;
+}
+.logo {
+  transform: scale(0.4);
+}
+.logoLogin {
+  transform: scale(0.8);
+}

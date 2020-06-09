@@ -127,46 +127,46 @@ class AuthRestAPIsTests {
 			.andExpect(content().string("Fail -> Email is already in use!"));
 	}
 
-	@Test
-	void signUpWhenRoleIsUnknown_thenReturnsBadRequestMessage() throws Exception {
+// 	@Test
+// 	void signUpWhenRoleIsUnknown_thenReturnsBadRequestMessage() throws Exception {
 
-		String contentInput = "{\"name\": \"paulinha\",\"username\": \"paulinha\",\"email\": \"paulinha@oi.com\",\"role\": [\"blablacar\"],\"password\": \"123456789\"}";
+// 		String contentInput = "{\"name\": \"paulinha\",\"username\": \"paulinha\",\"email\": \"paulinha@oi.com\",\"role\": [\"blablacar\"],\"password\": \"123456789\"}";
 		
-		mockMvc
-			.perform(
-				MockMvcRequestBuilders
-					.post("/api/auth/signup")
-					.contentType(MediaType.APPLICATION_JSON)
-					.accept(MediaType.APPLICATION_JSON)
-					.content(contentInput)
-			).andExpect(status().isBadRequest())
-			.andExpect(content().string("Fail! -> Cause: User Role not found."));
-	}
+// 		mockMvc
+// 			.perform(
+// 				MockMvcRequestBuilders
+// 					.post("/api/auth/signup")
+// 					.contentType(MediaType.APPLICATION_JSON)
+// 					.accept(MediaType.APPLICATION_JSON)
+// 					.content(contentInput)
+// 			).andExpect(status().isBadRequest())
+// 			.andExpect(content().string("Fail! -> Cause: User Role not found."));
+// 	}
 	
-	@Test
-	void signInWhenCorrectedData_thenReturnsToken() throws Exception {		
+// 	@Test
+// 	void signInWhenCorrectedData_thenReturnsToken() throws Exception {		
 		
-        Usuario paula = new Usuario();
-        paula.setUsername("paulinha");
-        paula.setPassword("123456789");
-		List<Usuario> allUsers = Arrays.asList(paula);
-        given(usuarioRepository.findAll()).willReturn(allUsers);
+//         Usuario paula = new Usuario();
+//         paula.setUsername("paulinha");
+//         paula.setPassword("123456789");
+// 		List<Usuario> allUsers = Arrays.asList(paula);
+//         given(usuarioRepository.findAll()).willReturn(allUsers);
 		
-		String contentInput = "{\"username\": \"paulinha\",\"password\": \"123456789\"}";
+// 		String contentInput = "{\"username\": \"paulinha\",\"password\": \"123456789\"}";
 		
-		when(jwtProvider.generateJwtToken(any())).thenReturn("Token!");
+// 		when(jwtProvider.generateJwtToken(any())).thenReturn("Token!");
 
-		mockMvc
-			.perform(
-				MockMvcRequestBuilders
-					.post("/api/auth/signin")
-					.contentType(MediaType.APPLICATION_JSON)
-					.accept(MediaType.APPLICATION_JSON)
-					.content(contentInput)
-			).andExpect(status().isOk())
-			.andExpect(jsonPath("$.tokenType", is("Bearer")))
-			.andExpect(jsonPath("$.accessToken", is("Token!")));
-	}
+// 		mockMvc
+// 			.perform(
+// 				MockMvcRequestBuilders
+// 					.post("/api/auth/signin")
+// 					.contentType(MediaType.APPLICATION_JSON)
+// 					.accept(MediaType.APPLICATION_JSON)
+// 					.content(contentInput)
+// 			).andExpect(status().isOk())
+// 			.andExpect(jsonPath("$.tokenType", is("Bearer")))
+// 			.andExpect(jsonPath("$.accessToken", is("Token!")));
+// 	}
 	
 	
 	@Test
