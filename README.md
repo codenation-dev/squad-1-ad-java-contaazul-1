@@ -18,7 +18,7 @@ Projeto final do curso <i>Java Women</i> da [Codenation](https://codenation.dev/
 - [Aplicação](https://lady-bug.netlify.app/)
 - [Relatório Final](/relatorio_final.pdf)
 - [Apresentação](/slides_apresentacao.pdf)
-- [Swagger](https://apirest-centralerros-lady-bug.herokuapp.com/swagger-ui.html)
+- [Swagger](https://ladybug-api.herokuapp.com/swagger-ui.html)
 
 ### Resumo do projeto
 
